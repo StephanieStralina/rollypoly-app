@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router';
 import { getUser } from '../../services/authService';
 import './App.css';
-import HomePage from '../HomePage/HomePage';
-import PostListPage from '../PostListPage/PostListPage';
-import NewPostPage from '../NewPostPage/NewPostPage';
+import LandingPage from '../LandingPage/LandingPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
@@ -18,13 +16,11 @@ export default function App() {
       <section id="main-section">
         {user ? (
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/posts" element={<PostListPage />} />
-            <Route path="/posts/new" element={<NewPostPage />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         ) : (
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
             <Route path="/login" element={<LogInPage setUser={setUser} />} />
           </Routes>

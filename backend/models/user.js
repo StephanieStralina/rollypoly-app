@@ -18,6 +18,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    rollHistory: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Input',
+    }]
   },
   {
     timestamps: true,
