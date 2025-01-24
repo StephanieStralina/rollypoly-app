@@ -1,7 +1,7 @@
 import DieImg from "../../components/DieImg/DieImg";
 import { NavLink, Link, useNavigate } from 'react-router';
 import { logOut } from '../../services/authService';
-import './LandingNav.css';
+import './LandingPage.css';
 
 
 export default function LandingPage({ user, setUser }) {
@@ -33,7 +33,7 @@ export default function LandingPage({ user, setUser }) {
           &nbsp; | &nbsp;
           <NavLink to="/signup">Sign Up</NavLink>
           &nbsp; | &nbsp;
-          <NavLink to="/">Demo</NavLink>
+          <NavLink to="/demo">Demo</NavLink>
         </>
       )}
     </nav>

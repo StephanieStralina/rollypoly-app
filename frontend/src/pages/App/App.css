@@ -1,11 +1,13 @@
 .App {
-  display: grid;
-  grid-template-rows: auto auto;
-}
-
-#main-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  min-height: 100vh;;
+}
+
+#main-section {
+  width: 100%;
+  min-height: 100vh;
 }
