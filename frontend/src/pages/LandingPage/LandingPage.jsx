@@ -11,7 +11,6 @@ export default function LandingPage({ user, setUser }) {
     return (
         <div className="landing-page">
         <h1>RollyPo.ly</h1>
-        {user ? <h3>Hi Logged In Visitor!</h3> : <h3>Hi Not Logged In Visitor!</h3>}
         <DieImg />
         <h3>A Dice Rolling App</h3>
         <nav className="landing-nav">

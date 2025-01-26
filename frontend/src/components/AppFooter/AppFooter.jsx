@@ -1,5 +1,4 @@
-import { NavLink, Link, useNavigate } from 'react-router';
-import { logOut } from '../../services/authService';
+import { NavLink, Link } from 'react-router';
 import './AppFooter.css'
 
 export default function AppFooter({user, setuser, handleLogOut}) {
@@ -22,7 +21,7 @@ export default function AppFooter({user, setuser, handleLogOut}) {
           &nbsp; | &nbsp;
           <NavLink to="/signup">Sign Up</NavLink>
           &nbsp; | &nbsp;
-          <NavLink to="/">Demo</NavLink>
+          <NavLink to="/">Home</NavLink>
         </>
         }
         </footer> 

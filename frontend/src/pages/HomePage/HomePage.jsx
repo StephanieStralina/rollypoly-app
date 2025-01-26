@@ -10,8 +10,22 @@ export default function HomePage({ user, setUser, handleLogOut }) {
     return(
         <div className="home-page">
             <h1>Home Page</h1>
+            <div>Dice Clicking Images Here</div>
             <DieImg />
-        <AppFooter user={user} setUser={setUser} className="footer" handleLogOut={handleLogOut} />
+            <div>If idle, "click dice to roll"</div>
+            <div>Dice Form Here</div>
+            {user ? 
+            (
+                <>
+                <span>User formulas here</span>
+                </>
+            ) : (
+                <>
+                <span>Guest Test Formula here</span>
+                </>
+            )}
+            
+        <AppFooter user={user} setUser={setUser} handleLogOut={handleLogOut} className="footer"/>
         </div>
     );
 }
