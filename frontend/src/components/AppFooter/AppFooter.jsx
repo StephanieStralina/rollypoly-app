@@ -2,7 +2,7 @@ import { NavLink, Link, useNavigate } from 'react-router';
 import { logOut } from '../../services/authService';
 import './AppFooter.css'
 
-export default function AppFooter({user, setuser}) {
+export default function AppFooter({user, setuser, handleLogOut}) {
     
     return (
 

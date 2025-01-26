@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
+import './LogInPage.css';
 
 export default function LogInPage({ setUser }) {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ export default function LogInPage({ setUser }) {
   }
 
   return (
-    <>
+    <div className='login-page'>
       <h2>Log In!</h2>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label>Email</label>
@@ -50,6 +51,6 @@ export default function LogInPage({ setUser }) {
         <button type="submit">LOG IN</button>
       </form>
       <p className="error-message">&nbsp;{errorMsg}</p>
-    </>
+    </div>
   );
 }

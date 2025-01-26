@@ -1,11 +1,11 @@
-.home-div {
+.home-page {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 
-.footer {
-    justify-content: flex-end;
+.home-page h1 {
+    height:fit-content;
 }
