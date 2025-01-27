@@ -4,6 +4,7 @@ import { useState } from "react";
 import AppFooter from "../../components/AppFooter/AppFooter";
 import './RollerPage.css'
 import DiceForm from "../../components/DiceForm/DiceForm";
+import DiceFormula from "../../components/DiceFormula/DiceFormula";
 
 
 export default function RollerPage({ user, setUser, handleLogOut, die }) {
@@ -14,6 +15,15 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
         diceSides: die || 20,
         modifier: 0,
     });
+
+    function setDemoRoll() {
+        setResultMessage("Now try clicking the dice to roll them!");
+        setRollForm({
+            numDice: 2,
+            diceSides: 8,
+            modifier: 2,
+        });
+    }
 
     function handleChange(evt) {
         setRollForm({ ...rollForm, [evt.target.name]: evt.target.value });
@@ -59,7 +69,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
                     </>
                 ) : (
                     <>
-                        <span>Guest Test Formula here</span>
+                        <DiceFormula setDemoRoll={setDemoRoll} />
                     </>
                 )}
 
