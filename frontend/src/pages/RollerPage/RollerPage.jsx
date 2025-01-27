@@ -16,12 +16,12 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
         modifier: 0,
     });
 
-    function setDemoRoll() {
+    function setDemoRoll(numDice, diceSides, modifier) {
         setResultMessage("Now try clicking the dice to roll them!");
         setRollForm({
-            numDice: 2,
-            diceSides: 8,
-            modifier: 2,
+            numDice,
+            diceSides,
+            modifier,
         });
     }
 
