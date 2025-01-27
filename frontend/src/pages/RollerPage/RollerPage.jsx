@@ -7,18 +7,27 @@ import './RollerPage.css'
 
 export default function RollerPage({ user, setUser, handleLogOut, die }) {
     const [rolledNumber, setRolledNumber] = useState(null);
+    const [resultMessage, setResultMessage] = useState("Click the dice to roll!");
 
     function rollDice() {
+        const interval = setInterval(() => {
         setRolledNumber(Math.floor(Math.random() * die) + 1);
-    }
-
+        }, 35);
+    
+        setTimeout(() => {
+          clearInterval(interval); 
+          const finalNumber = Math.floor(Math.random() * die) + 1
+          setRolledNumber(finalNumber);
+          setResultMessage(`You rolled a ${finalNumber}!`);
+        }, 500);
+      }
 
     return(
         <div className="roller-page">
             <h1>Home Page</h1>
             <div>Dice Clicking Images Here</div>
             <DieImg rollDice={rollDice} rolledNumber={rolledNumber} die={die} />
-            <div>Initial render, "click dice to roll", otherwise populate with result</div>
+            <div>{resultMessage}</div>
             <div>Dice Form Here</div>
             {user ? 
             (
