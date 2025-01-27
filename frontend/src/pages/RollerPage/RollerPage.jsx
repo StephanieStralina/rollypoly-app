@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate } from 'react-router';
 import { useState } from "react";
 import AppFooter from "../../components/AppFooter/AppFooter";
 import './RollerPage.css'
+import DiceForm from "../../components/DiceForm/DiceForm";
 
 
 export default function RollerPage({ user, setUser, handleLogOut, die }) {
@@ -28,7 +29,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
             <div>Dice Clicking Images Here</div>
             <DieImg rollDice={rollDice} rolledNumber={rolledNumber} die={die} />
             <div>{resultMessage}</div>
-            <div>Dice Form Here</div>
+            <DiceForm />
             {user ? 
             (
                 <>
