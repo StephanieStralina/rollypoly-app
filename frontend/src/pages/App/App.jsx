@@ -9,6 +9,7 @@ import LogInPage from '../LogInPage/LogInPage';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [die, setDie] = useState(20);
 
   function handleLogOut() {
     logOut();
@@ -21,12 +22,12 @@ export default function App() {
       <section id="main-section">
         {user ? (
           <Routes>
-            <Route path="/" element={<RollerPage user={user} setUser={setUser} handleLogOut={handleLogOut} />} />
+            <Route path="/" element={<RollerPage user={user} setUser={setUser} handleLogOut={handleLogOut} die={die} />} />
           </Routes>
         ) : (
           <Routes>
-            <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
-            <Route path="/demo" element={<RollerPage />} />
+            <Route path="/" element={<LandingPage user={user} setUser={setUser} die={die} />} />
+            <Route path="/demo" element={<RollerPage die={die} />} />
             <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
             <Route path="/login" element={<LogInPage setUser={setUser} />} />
           </Routes>

@@ -5,13 +5,13 @@ import './LandingPage.css';
 import AppFooter from "../../components/AppFooter/AppFooter";
 
 
-export default function LandingPage({ user, setUser }) {
+export default function LandingPage({ user, setUser, die }) {
     const navigate = useNavigate();
 
     return (
         <div className="landing-page">
         <h1>RollyPo.ly</h1>
-        <DieImg />
+        <DieImg die={die}/>
         <h3>A Dice Rolling App</h3>
         <nav className="landing-nav">
       {user ? (
