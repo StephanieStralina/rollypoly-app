@@ -1,0 +1,9 @@
+.hamburger-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 8vmin;
+    padding-right: 5vmin;
+    padding-top: 2vmin;
+}
+

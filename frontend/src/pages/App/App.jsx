@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router';
+import { Routes, Route, useNavigate } from 'react-router';
 import { getUser, logOut } from '../../services/authService';
 import './App.css';
 import LandingPage from '../LandingPage/LandingPage';
@@ -10,12 +10,15 @@ import LogInPage from '../LogInPage/LogInPage';
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [die, setDie] = useState(20);
+  const navigate = useNavigate();
 
   function handleLogOut() {
     logOut();
     setUser(null);
     navigate('/');
 }
+
+//TODO: Add onClick change die and dieImg for rolls
 
   return (
     <main className="App">

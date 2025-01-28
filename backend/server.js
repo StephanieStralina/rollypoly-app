@@ -21,7 +21,7 @@ app.use(require('./middleware/checkToken'));
 
 // API Routes
 app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/', require('./routes/input'));
+// app.use('/api/home', require('./routes/roller'));
 
 //All routers below will have all routes protected
 app.use(require('./middleware/ensureLoggedIn'))

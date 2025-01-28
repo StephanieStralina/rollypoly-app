@@ -5,6 +5,8 @@ import AppFooter from "../../components/AppFooter/AppFooter";
 import './RollerPage.css'
 import DiceForm from "../../components/DiceForm/DiceForm";
 import DiceFormula from "../../components/DiceFormula/DiceFormula";
+import addImg from '../../assets/images/addImg.png';
+import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
 
 
 export default function RollerPage({ user, setUser, handleLogOut, die }) {
@@ -54,9 +56,12 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
         }, 500);
     }
 
+    //TODO onClick addFormula btn
+    //TODO add screen sizing so that HamburgerMenu only displays on mobile
 
     return (
         <div className="roller-page">
+            <HamburgerNav />
             <h1>Home Page</h1>
             <div>Dice Clicking Images Here</div>
             <DieImg rollDice={rollDice} rolledNumber={rolledNumber} die={die} />
@@ -72,6 +77,19 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
                         <DiceFormula setDemoRoll={setDemoRoll} />
                     </>
                 )}
+            {user ?
+                (
+                    <div className="add-formula-btn">
+                    <img src={addImg} style={{maxWidth:'10vmin', maxHeight:'10vmin'}}></img>
+                    <span>Click to add formula</span>
+                    </div>
+                ) : (
+                    <>
+                    <img src={addImg} style={{maxWidth:'10vmin', maxHeight:'10vmin', margin: '4vmin'}}></img>
+                    <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
+                    </>
+                )
+            }
 
             <AppFooter user={user} setUser={setUser} handleLogOut={handleLogOut} className="footer" />
         </div>
