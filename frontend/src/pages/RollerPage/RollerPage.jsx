@@ -17,6 +17,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
         diceSides: die || 20,
         modifier: 0,
     });
+    const [demoHistory, setDemoHistory] = useState([]);
 
     function setDemoRoll(numDice, diceSides, modifier) {
         setResultMessage("Now try clicking the dice to roll them!");
@@ -53,6 +54,19 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
                 )} on your ${rollForm.numDice}d${rollForm.diceSides}
              + ${modifier} modifier)`
             );
+            if (!user) {
+                const completeRoll = {
+                    result: finalResult,
+                    numDice: rollForm.numDice,
+                    diceSides: rollForm.diceSides,
+                    modifier: rollForm.modifier,
+                }
+                if (demoHistory.length >= 10){
+                    setDemoHistory([...demoHistory.slice(1), completeRoll]);
+                } else {
+                    setDemoHistory([...demoHistory, completeRoll]);
+                }
+            }
         }, 500);
     }
 
@@ -61,7 +75,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
 
     return (
         <div className="roller-page">
-            <HamburgerNav />
+            <HamburgerNav demoHistory={demoHistory} />
             <h1>Home Page</h1>
             <div>Dice Clicking Images Here</div>
             <DieImg rollDice={rollDice} rolledNumber={rolledNumber} die={die} />
