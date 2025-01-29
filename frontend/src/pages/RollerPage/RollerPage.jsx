@@ -22,6 +22,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
         formula: null,
     });
     const [demoHistory, setDemoHistory] = useState([]);
+    const [userHistory, setUserHistory] = useState(null);
 
     //Use effect to populate formulas for user
 
@@ -56,12 +57,12 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
         });
     }
 
-    function rollDice() {
+    async function rollDice() {
         const interval = setInterval(() => {
             setRolledNumber(Math.floor(Math.random() * rollForm.diceSides) + 1);
         }, 35);
 
-        setTimeout(() => {
+        setTimeout(async () => {
             clearInterval(interval);
             //Final Roll Math
             const results = [];
@@ -93,6 +94,36 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
                 }
             } else {
                 //user logic here
+                const completeUserRoll = {
+                    result: finalResult,
+                    numDice: rollForm.numDice,
+                    diceSides: rollForm.diceSides,
+                    modifier: rollForm.modifier,
+                    source: rollForm.source,
+                    formula: rollForm.formula || null,  // formula id
+                    createdBy: user._id,
+                };
+                let input = await rollService.findRoller(user._id);
+                if (input && input.length === 0) {
+                    console.log('no roller found');
+                    input = await rollService.initializeRoller(completeUserRoll);
+                    user.rollHistory.push(input._id);
+                    await user.save();
+                } else {
+                    console.log('input found:', input);
+                    input.result = finalResult;
+                    input.numDice = rollForm.numDice;
+                    input.diceSides = rollForm.diceSides;
+                    input.modifier = rollForm.modifier;
+                    input.source = rollForm.source;
+                    input.formula = rollForm.formula || null;
+                    await input.save();
+                    if (user.rollHistory.length >= 10) {
+                        user.rollHistory = user.rollHistory.slice(1);
+                    }
+                    user.rollHistory.push(input._id);
+                    await user.save();
+                }
             }
         }, 500);
 

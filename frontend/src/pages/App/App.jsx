@@ -47,6 +47,7 @@ export default function App() {
   const addFormula = async (formattedFormulaData) => {
     const newFormula = await formulaService.createFormula(formattedFormulaData);
     setFormulas([...formulas, newFormula]);
+    handleModalClose();
   }
 
   const handleUpdateFormula = async (formulaId, formattedFormulaData) => {
