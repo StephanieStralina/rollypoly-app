@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const formulaSchema = new Schema(
     {
+      name: {
+        type: String,
+        required: true,
+      },
       diceSides: {
         type: Number,
         required: true,
@@ -17,7 +21,7 @@ const formulaSchema = new Schema(
       },
       collection: {
         type: String,
-        enum: ['All'],
+        enum: ['None', 'Create Collection'],
       },
       createdBy: {
         type: Schema.Types.ObjectId,

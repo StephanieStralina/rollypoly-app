@@ -1,35 +1,62 @@
 import DieImg from "../../components/DieImg/DieImg";
 import { NavLink, Link, useNavigate } from 'react-router';
 import { useState } from "react";
-import AppFooter from "../../components/AppFooter/AppFooter";
+import * as rollService from '../../services/rollService';
 import './RollerPage.css'
+import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceForm from "../../components/DiceForm/DiceForm";
 import DiceFormula from "../../components/DiceFormula/DiceFormula";
-import addImg from '../../assets/images/addImg.png';
 import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
+import FormulaModal from "../../components/FormulaModal/FormulaModal";
+import addImg from '../../assets/images/addImg.png';
 
 
-export default function RollerPage({ user, setUser, handleLogOut, die }) {
+export default function RollerPage({ user, setUser, handleLogOut, die, formulas, addFormula }) {
     const [rolledNumber, setRolledNumber] = useState(null);
     const [resultMessage, setResultMessage] = useState("Click the dice to roll!");
     const [rollForm, setRollForm] = useState({
         numDice: 1,
         diceSides: die || 20,
         modifier: 0,
+        source: 'manual',
+        formula: null,
     });
     const [demoHistory, setDemoHistory] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    function setDemoRoll(numDice, diceSides, modifier) {
+    const toggleModal = () => setModalIsOpen(!modalIsOpen);
+
+    //Use effect to populate formulas for user
+
+    function setDemoRoll(numDice, diceSides, modifier, source) {
         setResultMessage("Now try clicking the dice to roll them!");
         setRollForm({
             numDice,
             diceSides,
             modifier,
+            source,
+            formula: null,
+        });
+    }
+
+    function setUserRoll(formula) {
+        setRollForm({
+            name: formula.name,
+            numDice: formula.numDice,
+            diceSides: formula.diceSides,
+            modifier: formula.modifier,
+            source: 'formula',
+            formula: formula._id, // Store formula reference
         });
     }
 
     function handleChange(evt) {
-        setRollForm({ ...rollForm, [evt.target.name]: evt.target.value });
+        setRollForm({
+            ...rollForm,
+            [evt.target.name]: evt.target.value,
+            source: 'manual',
+            formula: null,
+        });
     }
 
     function rollDice() {
@@ -60,22 +87,29 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
                     numDice: rollForm.numDice,
                     diceSides: rollForm.diceSides,
                     modifier: rollForm.modifier,
+                    source: rollForm.source,
                 }
-                if (demoHistory.length >= 10){
+                if (demoHistory.length >= 10) {
                     setDemoHistory([...demoHistory.slice(1), completeRoll]);
                 } else {
                     setDemoHistory([...demoHistory, completeRoll]);
                 }
+            } else {
+                //user logic here
             }
         }, 500);
+
+        //Function to add roll object to user history
     }
 
-    //TODO onClick addFormula btn
+    function formulaModal() {
+
+    }
     //TODO add screen sizing so that HamburgerMenu only displays on mobile
 
     return (
         <div className="roller-page">
-            <HamburgerNav demoHistory={demoHistory} />
+            <HamburgerNav demoHistory={demoHistory} user={user} />
             <h1>Home Page</h1>
             <div>Dice Clicking Images Here</div>
             <DieImg rollDice={rollDice} rolledNumber={rolledNumber} die={die} />
@@ -84,7 +118,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
             {user ?
                 (
                     <>
-                        <span>User formulas here</span>
+                        <DiceFormula user={user} formulas={formulas} setUserRoll={setUserRoll} />
                     </>
                 ) : (
                     <>
@@ -93,17 +127,18 @@ export default function RollerPage({ user, setUser, handleLogOut, die }) {
                 )}
             {user ?
                 (
-                    <div className="add-formula-btn">
-                    <img src={addImg} style={{maxWidth:'10vmin', maxHeight:'10vmin'}}></img>
-                    <span>Click to add formula</span>
+                    <div className="add-formula-btn" onClick={toggleModal}>
+                        <img src={addImg} style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
+                        <span>Click to add formula</span>
                     </div>
                 ) : (
                     <>
-                    <img src={addImg} style={{maxWidth:'10vmin', maxHeight:'10vmin', margin: '4vmin'}}></img>
-                    <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
+                        <img src={addImg} style={{ maxWidth: '10vmin', maxHeight: '10vmin', margin: '4vmin' }}></img>
+                        <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
                     </>
                 )
             }
+            <FormulaModal isOpen={modalIsOpen} toggleModal={toggleModal} user={user} addFormula={addFormula} />
 
             <AppFooter user={user} setUser={setUser} handleLogOut={handleLogOut} className="footer" />
         </div>

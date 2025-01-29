@@ -4,7 +4,7 @@ import './HamburgerNav.css'
 import hamburgerImg from '../../assets/images/hamburgerImg.png'
 import closeImg from '../../assets/images/closeImg.png'
 
-export default function HamburgerNav({ demoHistory }) {
+export default function HamburgerNav({ demoHistory, user }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -19,16 +19,27 @@ export default function HamburgerNav({ demoHistory }) {
             }
             {isOpen && (
                     <ul className="dropdown-menu">
+                    {user ? (
+                        <>
                     <li>Settings</li>
                     <li>Formulas</li>
                     <div>
-                        <h3>History</h3>
+                        <h3>User History</h3>
+                    </div>
+                        </>
+                    ):(
+                    <div>
+                        <h3>Guest History</h3>
                         {demoHistory.map((roll, index) => (
                             <li key={index}>
                                 {`Result: ${roll.result} - Dice: ${roll.numDice}d${roll.diceSides} - Mod: ${roll.modifier}`}
                             </li>
                         ))}
                     </div>
+                    )
+                    }
+
+                    
                     </ul>
                 )}
         </nav>
