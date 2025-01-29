@@ -108,11 +108,11 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                             onChange={onChange}
                         >
                             <option value="None">None</option>
-                            <option value="All">All</option>
                         </select>
                     </label>
-                    <button type="submit">Save Formula</button>
+                    <button type="submit">{formulaId ? ('Update Formula') : ('Save Formula')}</button>
                 </form>
+                {formulaId ? (<button type="delete">Delete</button>) : ""}
             </div>
         </div>
     );
