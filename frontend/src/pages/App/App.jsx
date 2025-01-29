@@ -45,6 +45,15 @@ export default function App() {
   const [formulas, setFormulas] = useState(formulaTempArray);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchUserFormulas = async () => {
+      const formulasData = await formulaService.index();
+      setFormulas(formulasData);
+    };
+    if (user) fetchUserFormulas();
+  }, [user]);
+
+
   function handleLogOut() {
     logOut();
     setUser(null);
@@ -58,12 +67,14 @@ export default function App() {
     setFormulas([...formulas, newFormula]);
   }
 
+ 
+
   return (
     <main className="App">
       <section id="main-section">  
 
           <Routes>
-          <Route path="/" element={<LandingPage user={user} setUser={setUser} die={die} />} />
+          <Route path="/" element={user ? (<Navigate to="/dashboard" replace />) : (<LandingPage user={user} setUser={setUser} die={die} />)} />
           <Route path="/demo" element={<RollerPage die={die} />} />
           <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LogInPage setUser={setUser} />} />

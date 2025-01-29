@@ -1,4 +1,4 @@
-import { Link } from "react-router"
+import { Link, NavLink } from "react-router"
 import { useState } from "react"
 import './HamburgerNav.css'
 import hamburgerImg from '../../assets/images/hamburgerImg.png'
@@ -21,8 +21,8 @@ export default function HamburgerNav({ demoHistory, user }) {
                     <ul className="dropdown-menu">
                     {user ? (
                         <>
-                    <li>Settings</li>
-                    <li>Formulas</li>
+                    <li><NavLink to='/settings'>Settings</NavLink></li>
+                    <li><NavLink to='/formulas'>Formulas</NavLink></li>
                     <div>
                         <h3>User History</h3>
                     </div>

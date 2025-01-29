@@ -4,6 +4,7 @@ export default function SettingPage() {
 
     return (
         <>
+        <h2>Settings Page</h2>
         </>
     )
 }

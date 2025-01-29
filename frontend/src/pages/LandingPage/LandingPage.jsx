@@ -6,7 +6,7 @@ import './LandingPage.css';
 import AppFooter from "../../components/AppFooter/AppFooter";
 
 
-export default function LandingPage({ user, setUser, die }) {
+export default function LandingPage({ user, setUser, die, handleLogOut }) {
     const navigate = useNavigate();
 
 
