@@ -8,7 +8,6 @@ export default function formulaModal({ isOpen, toggleModal, user, addFormula}) {
         diceSides: 20,
         modifier: 0,
         collection: 'None',
-        createdBy: user ? user._id : null
     })
     
 
@@ -29,6 +28,7 @@ export default function formulaModal({ isOpen, toggleModal, user, addFormula}) {
                 modifier: Number(formulaData.modifier),
             };
             await addFormula(formattedFormulaData)
+            toggleModal();
         } catch (e) {
             console.error('Error submitting formula:', error);
         }

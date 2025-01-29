@@ -1,4 +1,4 @@
-const Input = require('../models/input');
+const Formula = require('../models/formula');
 
 module.exports = {
   createFormula,
@@ -7,5 +7,13 @@ module.exports = {
 
 
 async function createFormula(req, res) {
-    console.log(req.body);
+    try {
+        console.log(req.body);
+        req.body.createdBy = req.user._id;
+        const formula = await Formula.create(req.body)
+        res.status(201).json(formula);
+    } catch (e) {
+        console.log(e);
+        res.status(400).json({ message: 'Create Formula Failed '});
+    }
 }
