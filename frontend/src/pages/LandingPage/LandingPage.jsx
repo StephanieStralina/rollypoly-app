@@ -1,5 +1,6 @@
 import DieImg from "../../components/DieImg/DieImg";
 import { NavLink, Link, useNavigate } from 'react-router';
+import { useEffect } from "react";
 import { logOut } from '../../services/authService';
 import './LandingPage.css';
 import AppFooter from "../../components/AppFooter/AppFooter";
@@ -7,6 +8,7 @@ import AppFooter from "../../components/AppFooter/AppFooter";
 
 export default function LandingPage({ user, setUser, die }) {
     const navigate = useNavigate();
+
 
     return (
         <div className="landing-page">

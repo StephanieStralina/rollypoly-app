@@ -22,7 +22,13 @@ export default function formulaModal({ isOpen, toggleModal, user, addFormula}) {
     async function submitFormula(evt) {
         evt.preventDefault();
         try {
-            addFormula(formulaData)
+            const formattedFormulaData = {
+                ...formulaData,
+                numDice: Number(formulaData.numDice),
+                diceSides: Number(formulaData.diceSides),
+                modifier: Number(formulaData.modifier),
+            };
+            await addFormula(formattedFormulaData)
         } catch (e) {
             console.error('Error submitting formula:', error);
         }

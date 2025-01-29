@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
+import AppFooter from '../../components/AppFooter/AppFooter';
+import './SignUpPage.css'
 
 export default function SignUpPage({ setUser }) {
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ export default function SignUpPage({ setUser }) {
   const disable = formData.password !== formData.confirm;
 
   return (
-    <>
+    <div className='signup-page'>
       <h2>Sign Up!</h2>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label>Name</label>
@@ -72,6 +74,7 @@ export default function SignUpPage({ setUser }) {
         </button>
       </form>
       <p className="error-message">&nbsp;{errorMsg}</p>
-    </>
+      <AppFooter className="footer"/>
+    </div>
   );
 }
