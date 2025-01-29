@@ -5,7 +5,7 @@ import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import './FormulaPage.css';
 import addImg from '../../assets/images/addImg.png';
 
-export default function FormulaPage({ formulas, user, toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula, setSelectedFormula, handleUpdateFormula }) {
+export default function FormulaPage({ formulas, user, toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula, setSelectedFormula, handleUpdateFormula, handleDeleteFormula }) {
 
     const handleFormulaClick = (formula) => {
         setSelectedFormula(formula._id);
@@ -27,7 +27,8 @@ export default function FormulaPage({ formulas, user, toggleModal, modalIsOpen, 
             formulaId={selectedFormula}
             handleModalClose={handleModalClose}
             setSelectedFormula={setSelectedFormula}
-            handleUpdateFormula={handleUpdateFormula} />
+            handleUpdateFormula={handleUpdateFormula}
+            handleDeleteFormula={handleDeleteFormula} />
         <AppFooter className="footer"/>
         </div>
     )

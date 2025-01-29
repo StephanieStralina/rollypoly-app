@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import * as formulaService from '../../services/formulaService';
 import './FormulaModal.css'
 
-export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula, handleUpdateFormula }) {
+export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula, handleUpdateFormula, handleDeleteFormula }) {
 
     const [formulaData, setFormulaData] = useState({
         name: '',
@@ -120,7 +120,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                     </label>
                     <button type="submit">{formulaId ? ('Update Formula') : ('Save Formula')}</button>
                 </form>
-                {formulaId ? (<button type="delete">Delete</button>) : ""}
+                {formulaId ? (<button type="delete" onClick={() => handleDeleteFormula(formulaId)}>Delete</button>) : ""}
             </div>
         </div>
     );

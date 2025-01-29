@@ -41,7 +41,7 @@ export default function App() {
     setSelectedFormula(null);
     toggleModal(); 
 };
-  //Other todo
+
   //TODO: Add onClick change die and dieImg for rolls
 
   const addFormula = async (formattedFormulaData) => {
@@ -53,6 +53,17 @@ export default function App() {
     const updatedFormula = await formulaService.update(formulaId, formattedFormulaData);
     setFormulas(formulas.map((formula) => (formulaId === formula._id ? updatedFormula : formula)));
     navigate('/formulas');
+  };
+
+  const handleDeleteFormula = async (formulaId) => {
+    try {
+      const deletedFormula = await formulaService.deleteFormula(formulaId);
+      setFormulas(formulas.filter((formula) => formula._id !== formulaId));
+      handleModalClose();
+      navigate('/formulas');
+    } catch (e) {
+      console.error('Error:', e);
+    }
   };
 
   return (
@@ -107,6 +118,7 @@ export default function App() {
                 selectedFormula={selectedFormula}
                 setSelectedFormula={setSelectedFormula}
                 handleUpdateFormula={handleUpdateFormula}
+                handleDeleteFormula={handleDeleteFormula}
               />
             ) : (
               <Navigate to="/" replace />

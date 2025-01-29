@@ -18,4 +18,7 @@ router.get('/formulas/:formulaId', formulaCtrl.show)
 //UPDATE /formulas/:formulaID, formulaCtrl.update
 router.put('/formulas/:formulaId', formulaCtrl.update)
 
+//DELETE /formulas/:fomulaID, formulaCtrl.deleteFormula
+router.delete('/formulas/:formulaId', formulaCtrl.deleteFormula)
+
 module.exports = router;

@@ -30,3 +30,11 @@ export async function update(formulaId, formulasData) {
         console.log(e)
     }   
 }
+
+export async function deleteFormula(formulaId, formulasData) {
+    try {
+        return sendRequest(`${BASE_URL2}/${formulaId}`, 'DELETE');
+    } catch (e) {
+        console.log(e)
+    }
+}
