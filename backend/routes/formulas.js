@@ -15,5 +15,7 @@ router.get('/dashboard', formulaCtrl.index)
 //SHOW /formulas/:formulaID, formulaCtrl.show
 router.get('/formulas/:formulaId', formulaCtrl.show)
 
+//UPDATE /formulas/:formulaID, formulaCtrl.update
+router.put('/formulas/:formulaId', formulaCtrl.update)
 
 module.exports = router;

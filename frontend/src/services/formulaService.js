@@ -22,3 +22,11 @@ export async function show(formulaId) {
         console.log(e);
     }
 }
+
+export async function update(formulaId, formulasData) {
+    try {
+        return sendRequest(`${BASE_URL2}/${formulaId}`, 'PUT', formulasData);
+    } catch (e) {
+        console.log(e)
+    }   
+}

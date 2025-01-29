@@ -49,7 +49,11 @@ export default function App() {
     setFormulas([...formulas, newFormula]);
   }
 
- 
+  const handleUpdateFormula = async (formulaId, formattedFormulaData) => {
+    const updatedFormula = await formulaService.update(formulaId, formattedFormulaData);
+    setFormulas(formulas.map((formula) => (formulaId === formula._id ? updatedFormula : formula)));
+    navigate('/formulas');
+  };
 
   return (
     <main className="App">
@@ -102,6 +106,7 @@ export default function App() {
                 handleModalClose={handleModalClose}
                 selectedFormula={selectedFormula}
                 setSelectedFormula={setSelectedFormula}
+                handleUpdateFormula={handleUpdateFormula}
               />
             ) : (
               <Navigate to="/" replace />

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import * as formulaService from '../../services/formulaService';
 import './FormulaModal.css'
 
-export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula }) {
+export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula, handleUpdateFormula }) {
 
     const [formulaData, setFormulaData] = useState({
         name: '',
@@ -49,25 +49,33 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
 
     async function submitFormula(evt) {
         evt.preventDefault();
-        try {
-            const formattedFormulaData = {
-                ...formulaData,
-                numDice: Number(formulaData.numDice),
-                diceSides: Number(formulaData.diceSides),
-                modifier: Number(formulaData.modifier),
-            };
-            await addFormula(formattedFormulaData)
-            setFormulaData({
-                name: '',
-                numDice: 1,
-                diceSides: 20,
-                modifier: 0,
-                group: 'None',
-            });
-            handleModalClose();
-        } catch (e) {
-            console.error('Error submitting formula:', error);
-        }
+        const formattedFormulaData = {
+            ...formulaData,
+            numDice: Number(formulaData.numDice),
+            diceSides: Number(formulaData.diceSides),
+            modifier: Number(formulaData.modifier),
+        };
+        if (formulaId) {
+            try {
+            await handleUpdateFormula(formulaId, formattedFormulaData);
+            } catch (e) {
+                console.error('Error submitting formula:', e);
+            }
+          } else {
+            try {
+                await addFormula(formattedFormulaData) 
+            } catch (e) {
+                console.error('Error submitting formula:', e);
+            }
+          }
+        setFormulaData({
+            name: '',
+            numDice: 1,
+            diceSides: 20,
+            modifier: 0,
+            group: 'None',
+        });
+        handleModalClose();
     }
 
     if (!modalIsOpen) return null;

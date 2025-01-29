@@ -4,7 +4,7 @@ module.exports = {
   createFormula,
   index,
   show,
-//   update
+  update
 };
 
 
@@ -33,5 +33,26 @@ async function show(req, res) {
   } catch (e) {
     console.log(e);
     res.status(500).json({ e: e.message });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const formula = await Formula.findById(req.params.formulaId);
+    if (!formula.createdBy.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that! >:[ ")
+    };
+
+    const updatedFormula = await Formula.findByIdAndUpdate(
+      req.params.formulaId,
+      req.body,
+      { new: true }
+    );
+
+    updatedFormula._doc.createdBy = req.user._id;
+    res.status(200).json(updatedFormula);
+  } catch (e) {
+    console.log(e);
+    res.status.json({ e: e.message })
   }
 }
