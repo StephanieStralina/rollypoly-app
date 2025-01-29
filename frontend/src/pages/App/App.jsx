@@ -41,7 +41,7 @@ export default function App() {
     setSelectedFormula(null);
     toggleModal(); 
 };
-
+  //Other todo
   //TODO: Add onClick change die and dieImg for rolls
 
   const addFormula = async (formattedFormulaData) => {
