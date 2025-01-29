@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
 import AppFooter from '../../components/AppFooter/AppFooter';
-import './LogInPage.css';
+import './LogInPageTemp.css';
 
 export default function LogInPage({ setUser }) {
   const [formData, setFormData] = useState({
