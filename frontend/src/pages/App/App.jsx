@@ -17,6 +17,7 @@ export default function App() {
   const [die, setDie] = useState(20);
   const [formulas, setFormulas] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedFormula, setSelectedFormula] = useState(null);
   const navigate = useNavigate();
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
@@ -35,6 +36,11 @@ export default function App() {
     setUser(null);
     navigate('/');
   }
+
+  const handleModalClose = () => {
+    setSelectedFormula(null);
+    toggleModal(); 
+};
 
   //TODO: Add onClick change die and dieImg for rolls
 
@@ -93,6 +99,9 @@ export default function App() {
                 addFormula={addFormula}
                 toggleModal={toggleModal}
                 modalIsOpen={modalIsOpen}
+                handleModalClose={handleModalClose}
+                selectedFormula={selectedFormula}
+                setSelectedFormula={setSelectedFormula}
               />
             ) : (
               <Navigate to="/" replace />

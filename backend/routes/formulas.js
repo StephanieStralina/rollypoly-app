@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const formulaCtrl = require('../controllers/formulas');
 
-// All paths start with '/api/dashboard'
+// Paths for '/api/dashboard'
 
-// POST /, formulaCtrl.createFormula
-router.post('/', formulaCtrl.createFormula)
+// POST /dashboard, formulaCtrl.createFormula
+router.post('/dashboard', formulaCtrl.createFormula)
 
-//INDEX /, formulaCtrl.index
-router.get('/', formulaCtrl.index)
+//INDEX /dashboard, formulaCtrl.index
+router.get('/dashboard', formulaCtrl.index)
+
+// Paths for '/api/formulas'
+
+//SHOW /formulas/:formulaID, formulaCtrl.show
+router.get('/formulas/:formulaId', formulaCtrl.show)
 
 
 module.exports = router;

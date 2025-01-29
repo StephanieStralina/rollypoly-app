@@ -11,7 +11,7 @@ import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import addImg from '../../assets/images/addImg.png';
 
 
-export default function RollerPage({ user, setUser, handleLogOut, die, formulas, addFormula, toggleModal, modalIsOpen, setUserRoll}) {
+export default function RollerPage({ user, setUser, handleLogOut, die, formulas, addFormula, toggleModal, modalIsOpen, setUserRoll }) {
     const [rolledNumber, setRolledNumber] = useState(null);
     const [resultMessage, setResultMessage] = useState("Click the dice to roll!");
     const [rollForm, setRollForm] = useState({
@@ -115,11 +115,11 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
             {user ?
                 (
                     <>
-                        <DiceFormula user={user} formulas={formulas} setUserRoll={setUserRoll} onClickHandler={(formula) => toggleModal(formula)} />
+                        <DiceFormula user={user} formulas={formulas} setUserRoll={setUserRoll} onClickHandler={setUserRoll} />
                     </>
                 ) : (
                     <>
-                        <DiceFormula setDemoRoll={setDemoRoll} onClickHandler={setUserRoll}/>
+                        <DiceFormula setDemoRoll={setDemoRoll} onClickHandler={setDemoRoll}/>
                     </>
                 )}
             {user ?

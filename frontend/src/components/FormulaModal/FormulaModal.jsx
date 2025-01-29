@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import * as formulaService from '../../services/formulaService';
 import './FormulaModal.css'
 
-export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula}) {
+export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula }) {
+
     const [formulaData, setFormulaData] = useState({
         name: '',
         numDice: 1,
@@ -10,6 +12,33 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
         group: 'None',
     })
     
+    useEffect(() => {
+        if (!formulaId) {
+            setFormulaData({
+                name: '',
+                numDice: 1,
+                diceSides: 20,
+                modifier: 0,
+                group: 'None',
+            });
+            return;
+        }
+        const controller = new AbortController(); 
+        const fetchFormula = async () => {
+            try {
+                const formulaDetails = await formulaService.show(formulaId, { signal: controller.signal });
+                setFormulaData(formulaDetails);
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error("Error fetching formula:", error);
+                }
+            }
+        };
+        fetchFormula();
+        return () => {
+        };
+    }, [formulaId, modalIsOpen]);
+
 
     function onChange(evt){
         setFormulaData({
@@ -28,7 +57,14 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                 modifier: Number(formulaData.modifier),
             };
             await addFormula(formattedFormulaData)
-            toggleModal();
+            setFormulaData({
+                name: '',
+                numDice: 1,
+                diceSides: 20,
+                modifier: 0,
+                group: 'None',
+            });
+            handleModalClose();
         } catch (e) {
             console.error('Error submitting formula:', error);
         }
@@ -36,11 +72,17 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
 
     if (!modalIsOpen) return null;
 
+    
+
     return (
-        <div className="modal-overlay" onClick={toggleModal}>
+        <div className="modal-overlay" onClick={formulaId ? handleModalClose : toggleModal}>
             <div className="modal-content" onClick={(evt) => evt.stopPropagation()}>
-                <button className="close-btn" onClick={toggleModal}>×</button>
-                <h2>Add New Formula</h2>
+                <button className="close-btn" onClick={formulaId ? handleModalClose : toggleModal}>×</button>
+                {formulaId ? (
+                    <h2>Edit Formula</h2>
+            ) : (
+            <h2>Add New Formula</h2>
+            )}
                 <form onSubmit={submitFormula}>
                     <label>
                         Formula Name:
