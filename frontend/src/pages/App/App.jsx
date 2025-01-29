@@ -7,6 +7,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import RollerPage from '../RollerPage/RollerPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
+import SettingPage from '../SettingPage/SettingPage';
+import FormulaPage from '../FormulaPage/FormulaPage';
+
+
 
 const formulaTempArray = [
   {
@@ -64,8 +68,7 @@ export default function App() {
           <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LogInPage setUser={setUser} />} />
 
-          <Route
-            path="/dashboard"
+          <Route path="/dashboard"
             element={user ? (
               <RollerPage
                 user={user}
@@ -74,6 +77,28 @@ export default function App() {
                 die={die}
                 formulas={formulas}
                 addFormula={addFormula}
+              />
+            ) : (
+              <Navigate to="/" replace />
+            )}
+          />
+          <Route path="/settings"
+            element={user ? (
+              <SettingPage
+                user={user}
+                setUser={setUser}
+                handleLogOut={handleLogOut}
+              />
+            ) : (
+              <Navigate to="/" replace />
+            )}
+          />
+          <Route path="/formulas"
+            element={user ? (
+              <FormulaPage
+                user={user}
+                setUser={setUser}
+                handleLogOut={handleLogOut}
               />
             ) : (
               <Navigate to="/" replace />
