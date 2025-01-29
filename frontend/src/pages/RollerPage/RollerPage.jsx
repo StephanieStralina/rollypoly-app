@@ -11,7 +11,7 @@ import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import addImg from '../../assets/images/addImg.png';
 
 
-export default function RollerPage({ user, setUser, handleLogOut, die, formulas, addFormula }) {
+export default function RollerPage({ user, setUser, handleLogOut, die, formulas, addFormula, toggleModal, modalIsOpen, setUserRoll}) {
     const [rolledNumber, setRolledNumber] = useState(null);
     const [resultMessage, setResultMessage] = useState("Click the dice to roll!");
     const [rollForm, setRollForm] = useState({
@@ -22,9 +22,6 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
         formula: null,
     });
     const [demoHistory, setDemoHistory] = useState([]);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-
-    const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
     //Use effect to populate formulas for user
 
@@ -46,7 +43,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
             diceSides: formula.diceSides,
             modifier: formula.modifier,
             source: 'formula',
-            formula: formula._id, // Store formula reference
+            formula: formula._id,
         });
     }
 
@@ -118,11 +115,11 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
             {user ?
                 (
                     <>
-                        <DiceFormula user={user} formulas={formulas} setUserRoll={setUserRoll} />
+                        <DiceFormula user={user} formulas={formulas} setUserRoll={setUserRoll} onClickHandler={(formula) => toggleModal(formula)} />
                     </>
                 ) : (
                     <>
-                        <DiceFormula setDemoRoll={setDemoRoll} />
+                        <DiceFormula setDemoRoll={setDemoRoll} onClickHandler={setUserRoll}/>
                     </>
                 )}
             {user ?
@@ -138,7 +135,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
                     </>
                 )
             }
-            <FormulaModal isOpen={modalIsOpen} toggleModal={toggleModal} user={user} addFormula={addFormula} />
+            <FormulaModal modalIsOpen={modalIsOpen} toggleModal={toggleModal} user={user} addFormula={addFormula} />
 
             <AppFooter user={user} setUser={setUser} handleLogOut={handleLogOut} className="footer" />
         </div>

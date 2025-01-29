@@ -1,19 +1,14 @@
 
 import './DiceFormula.css';
 
-export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas }) {
+export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas, onClickHandler }) {
 
     return (
         <div className='dice-formulas'>
             {user ? (
                     formulas.map((formula) => (
                         <button key={formula._id} className='dice-formula-btn'
-                            onClick={() => setUserRoll({
-                                numDice: formula.numDice,
-                                diceSides: formula.diceSides,
-                                modifier: formula.modifier,
-                                source: 'formula',
-                            })} >{formula.name}</button>
+                        onClick={() => onClickHandler(formula)} >{formula.name}</button>
                     ))
             ) : (
                 <>

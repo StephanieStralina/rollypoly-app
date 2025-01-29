@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './FormulaModal.css'
 
-export default function formulaModal({ isOpen, toggleModal, user, addFormula}) {
+export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula}) {
     const [formulaData, setFormulaData] = useState({
         name: '',
         numDice: 1,
         diceSides: 20,
         modifier: 0,
-        collection: 'None',
+        group: 'None',
     })
     
 
@@ -34,7 +34,7 @@ export default function formulaModal({ isOpen, toggleModal, user, addFormula}) {
         }
     }
 
-    if (!isOpen) return null;
+    if (!modalIsOpen) return null;
 
     return (
         <div className="modal-overlay" onClick={toggleModal}>
@@ -61,8 +61,8 @@ export default function formulaModal({ isOpen, toggleModal, user, addFormula}) {
                     <label>
                         Collection:
                         <select
-                            name="collection"
-                            value={formulaData.collection}
+                            name="group"
+                            value={formulaData.group}
                             onChange={onChange}
                         >
                             <option value="None">None</option>

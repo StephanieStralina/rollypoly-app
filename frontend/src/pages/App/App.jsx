@@ -12,38 +12,14 @@ import FormulaPage from '../FormulaPage/FormulaPage';
 
 
 
-const formulaTempArray = [
-  {
-    name: 'Attack',
-    numDice: 1,
-    diceSides: 20,
-    modifier: 8,
-    source: 'formula',
-    formula: 1,
-  },
-  {
-    name: 'Damage - Sword',
-    numDice: 2,
-    diceSides: 10,
-    modifier: 5,
-    source: 'formula',
-    formula: 2,
-  },
-  {
-    name: 'WIS Save',
-    numDice: 1,
-    diceSides: 20,
-    modifier: 2,
-    source: 'formula',
-    formula: 3,
-  },
-]
-
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [die, setDie] = useState(20);
-  const [formulas, setFormulas] = useState(formulaTempArray);
+  const [formulas, setFormulas] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
   useEffect(() => {
     const fetchUserFormulas = async () => {
@@ -88,6 +64,8 @@ export default function App() {
                 die={die}
                 formulas={formulas}
                 addFormula={addFormula}
+                toggleModal={toggleModal}
+                modalIsOpen = {modalIsOpen}
               />
             ) : (
               <Navigate to="/" replace />
@@ -110,6 +88,11 @@ export default function App() {
                 user={user}
                 setUser={setUser}
                 handleLogOut={handleLogOut}
+                formulas={formulas}
+                setFormulas={setFormulas}
+                addFormula={addFormula}
+                toggleModal={toggleModal}
+                modalIsOpen={modalIsOpen}
               />
             ) : (
               <Navigate to="/" replace />

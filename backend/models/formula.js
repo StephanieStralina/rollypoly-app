@@ -19,7 +19,7 @@ const formulaSchema = new Schema(
         type: Number,
         required: true, 
       },
-      collection: {
+      group: {
         type: String,
         enum: ['None', 'Create Collection'],
       },

@@ -1,0 +1,13 @@
+.formula-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formula-page h2 {
+    height: auto;
+}
+
+.formula-page>.dice-formulas {
+    width: 40vmin;
+}
