@@ -1,13 +1,17 @@
 import { NavLink, Link } from 'react-router';
 import './AppFooter.css'
 
-export default function AppFooter({user, setuser, handleLogOut}) {
+export default function AppFooter({user, setUser, handleLogOut}) {
     
     return (
 
         <footer className='footer'>
             {user ? (
         <>
+          <NavLink to="/dashboard">
+            Home
+          </NavLink>
+          &nbsp; | &nbsp;
           <Link to="" onClick={handleLogOut}>
             Log Out
           </Link>

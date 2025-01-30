@@ -1,9 +1,8 @@
 //RollerPage.jsx
 import DieImg from "../../components/DieImg/DieImg";
-import { NavLink, Link, useNavigate } from 'react-router';
+import { NavLink } from 'react-router';
 import { useState, useEffect } from "react";
 import * as rollService from '../../services/rollService';
-import * as formulaService from '../../services/formulaService';
 import './RollerPage.css'
 import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceForm from "../../components/DiceForm/DiceForm";
@@ -25,16 +24,22 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
     });
     const [demoHistory, setDemoHistory] = useState([]);
     const [userHistory, setUserHistory] = useState([]);
+    const [rollCount, setRollCount] = useState(0);
 
-  
-    
+    //useEffect() here
     useEffect(() => {
-        const fetchUserHistory = async () => {
-          const userHistoryData = await rollService.index();
-          setUserHistory(userHistoryData);
-        };
-        if (user) fetchUserHistory();
-      }, [userHistory]);
+        async function fetchUserHistory() {
+            if (user) {
+                console.log('Fetching user roll history')
+                const history = await rollService.index();
+                console.log('Fetched user roll history:', history);
+                setUserHistory(history);
+            }
+        }
+        fetchUserHistory();
+    }, [user, rollCount]);
+    
+
 
     function setDemoRoll(numDice, diceSides, modifier, source) {
         setResultMessage("Now try clicking the dice to roll them!");
@@ -124,11 +129,10 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
                 }
             }
         }, 500);
+        setRollCount(rollCount + 1);
     }
 
-    function formulaModal() {
 
-    }
     //TODO add screen sizing so that HamburgerMenu only displays on mobile and other menu displays on desktop
 
     return (

@@ -34,3 +34,7 @@ export function getToken() {
   }
   return token;
 }
+
+export async function updateUser(userData) {
+  return sendRequest(`${BASE_URL}/update`, 'PUT', userData);
+}

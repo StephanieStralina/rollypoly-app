@@ -30,12 +30,13 @@ export default function App() {
       setFormulas(formulasData);
     };
     if (user) fetchUserFormulas();
-  }, [user]);
+  }, [formulas.length]);
 
 
   function handleLogOut() {
     logOut();
     setUser(null);
+    setFormulas([]);
     navigate('/');
   }
 

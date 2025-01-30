@@ -5,7 +5,8 @@ const User = require('../models/user');
 
 module.exports = {
   signUp,
-  logIn
+  logIn,
+  updateUser
 };
 
 async function logIn(req, res) {
@@ -33,6 +34,29 @@ async function signUp(req, res) {
   }
 }
 
+async function updateUser(req, res) {
+  try {
+    const { name, email, password } = req.body;
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.name = name || user.name;
+    user.email = email || user.email;
+
+    if (password) {
+      user.password = await bcrypt.hash(password, 6);
+    }
+    await user.save();
+    
+    const token = createJWT(user);
+    res.json(token);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: 'Update Failed' });
+  }
+}
 
 
 /*--- Help Functions ---*/
