@@ -25,7 +25,7 @@ export default function HamburgerNav({ demoHistory, user, userHistory }) {
                     <li><NavLink to='/formulas'>Formulas</NavLink></li>
                     <div>
                         <h3>User History</h3>
-                        {userHistory.map((roll, index) => (
+                        {[...userHistory].reverse().map((roll, index) => (
                             <li key={index}>
                                 {`Result: ${roll.result} - Dice: ${roll.numDice}d${roll.diceSides} - Mod: ${roll.modifier}`}
                             </li>
@@ -35,7 +35,7 @@ export default function HamburgerNav({ demoHistory, user, userHistory }) {
                     ):(
                     <div>
                         <h3>Guest History</h3>
-                        {demoHistory.map((roll, index) => (
+                        {[...demoHistory].reverse().map((roll, index) => (
                             <li key={index}>
                                 {`Result: ${roll.result} - Dice: ${roll.numDice}d${roll.diceSides} - Mod: ${roll.modifier}`}
                             </li>

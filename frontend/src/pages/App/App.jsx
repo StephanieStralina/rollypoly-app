@@ -134,7 +134,7 @@ export default function App() {
               user ? (<Navigate to="/dashboard" replace />) 
               : (<LandingPage user={user} setUser={setUser} die={die} />)} />
           <Route path="/demo" element={
-              <RollerPage die={die} />} />
+              <RollerPage die={die} setFormulaData={setFormulaData} />} />
           <Route path="/signup" element={
             <SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LogInPage setUser={setUser} />} />
