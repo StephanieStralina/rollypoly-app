@@ -12,6 +12,7 @@ export default function LandingPage({ user, setUser, die, handleLogOut }) {
 
     return (
         <div className="landing-page">
+        <div className="backdrop">
         <h1>RollyPo.ly</h1>
         <DieImg die={die}/>
         <h3>A Dice Rolling App</h3>
@@ -35,6 +36,7 @@ export default function LandingPage({ user, setUser, die, handleLogOut }) {
       )}
     </nav>
     <AppFooter className="footer"/>
+    </div>
     </div>
     );
 }
