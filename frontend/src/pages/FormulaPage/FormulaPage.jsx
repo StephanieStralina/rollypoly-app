@@ -10,7 +10,8 @@ import addImg from '../../assets/images/addImg.png';
 export default function FormulaPage({ formulas, user, setUser, handleLogOut, 
     toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula, 
     setSelectedFormula, handleUpdateFormula, handleDeleteFormula,
-    groupList, newGroup, handleNewGroupChange, handleAddNewGroup }) {
+    groupList, newGroup, handleNewGroupChange, handleAddNewGroup, 
+    selectedGroup, handleGroupFilterChange }) {
 
     const handleFormulaClick = (formula) => {
         setSelectedFormula(formula._id);
@@ -27,7 +28,11 @@ export default function FormulaPage({ formulas, user, setUser, handleLogOut,
         <DiceFormula 
             user={user} 
             formulas={formulas} 
-            onClickHandler={handleFormulaClick} />
+            onClickHandler={handleFormulaClick}
+            selectedGroup={selectedGroup}
+            handleGroupFilterChange={handleGroupFilterChange}
+            groupList={groupList} 
+            />
         <FormulaModal user={user} 
             addFormula={addFormula} 
             modalIsOpen={modalIsOpen} 

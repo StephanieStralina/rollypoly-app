@@ -7,6 +7,10 @@ const groupSchema = new Schema ({
   unique: true,
   required: true,
   default: 'None',
+  },
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   }
 });
 

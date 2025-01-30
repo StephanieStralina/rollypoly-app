@@ -13,10 +13,10 @@ import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import addImg from '../../assets/images/addImg.png';
 
 
-export default function RollerPage({ user, 
-    setUser, handleLogOut, die, formulas, addFormula, 
-    toggleModal, modalIsOpen, setUserRoll, 
-    groupList, newGroup, handleNewGroupChange, handleAddNewGroup  }) {
+export default function RollerPage({ user,
+    setUser, handleLogOut, die, formulas, addFormula,
+    toggleModal, modalIsOpen, setUserRoll,
+    groupList, newGroup, handleNewGroupChange, handleAddNewGroup, handleGroupFilterChange, selectedGroup }) {
     const [rolledNumber, setRolledNumber] = useState(null);
     const [resultMessage, setResultMessage] = useState("Click the dice to roll!");
     const [demoHistory, setDemoHistory] = useState([]);
@@ -29,7 +29,7 @@ export default function RollerPage({ user,
         source: 'manual',
         formula: null,
     });
-//TODO: Add onClick change die and dieImg for rolls
+    //TODO: Add onClick change die and dieImg for rolls
 
     useEffect(() => {
         async function fetchUserHistory() {
@@ -40,7 +40,7 @@ export default function RollerPage({ user,
         }
         fetchUserHistory();
     }, [user, rollCount]);
-    
+
 
     function setDemoRoll(numDice, diceSides, modifier, source) {
         setResultMessage("Now try clicking the dice to roll them!");
@@ -135,64 +135,67 @@ export default function RollerPage({ user,
 
     return (
         <div className="roller-page">
-            <HamburgerNav 
-                demoHistory={demoHistory} 
-                userHistory={userHistory} 
+            <HamburgerNav
+                demoHistory={demoHistory}
+                userHistory={userHistory}
                 user={user} />
             <h1>Home Page</h1>
             <div>Dice Clicking Images Here</div>
-            <DieImg 
-                rollDice={rollDice} 
-                rolledNumber={rolledNumber} 
+            <DieImg
+                rollDice={rollDice}
+                rolledNumber={rolledNumber}
                 die={die} />
             <div>{resultMessage}</div>
             <DiceForm rollForm={rollForm} handleChange={handleChange} />
             {user ?
                 (
                     <>
-                        <DiceFormula 
-                            user={user} 
-                            formulas={formulas} 
-                            setUserRoll={setUserRoll} 
-                            onClickHandler={setUserRoll} />
+                        <DiceFormula
+                            user={user}
+                            formulas={formulas}
+                            setUserRoll={setUserRoll}
+                            onClickHandler={setUserRoll}
+                            selectedGroup={selectedGroup}
+                            handleGroupFilterChange={handleGroupFilterChange}
+                            groupList={groupList} />
                     </>
                 ) : (
                     <>
-                        <DiceFormula 
-                            setDemoRoll={setDemoRoll} 
-                            onClickHandler={setDemoRoll}/>
+                        <DiceFormula
+                            setDemoRoll={setDemoRoll}
+                            onClickHandler={setDemoRoll} />
                     </>
                 )}
             {user ?
                 (
                     <div className="add-formula-btn" onClick={toggleModal}>
-                        <img src={addImg} 
+                        <img src={addImg}
                             style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
                         <span>Click to add formula</span>
                     </div>
                 ) : (
                     <>
-                        <img src={addImg} 
+                        <img src={addImg}
                             style={{ maxWidth: '10vmin', maxHeight: '10vmin', margin: '4vmin' }}></img>
-                        <span><NavLink to="/sign-up">Sign up</NavLink> 
-                        or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
+                        <span><NavLink to="/sign-up">Sign up</NavLink>
+                            or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
                     </>
                 )
             }
-            <FormulaModal 
-                modalIsOpen={modalIsOpen} 
-                toggleModal={toggleModal} 
-                user={user} 
-                addFormula={addFormula} 
-                groupList={groupList} 
+            <FormulaModal
+                modalIsOpen={modalIsOpen}
+                toggleModal={toggleModal}
+                user={user}
+                addFormula={addFormula}
+                groupList={groupList}
                 newGroup={newGroup}
                 handleNewGroupChange={handleNewGroupChange}
                 handleAddNewGroup={handleAddNewGroup} />
 
-            <AppFooter 
-                user={user} 
-                setUser={setUser} 
-                handleLogOut={handleLogOut} 
+            <AppFooter
+                user={user}
+                setUser={setUser}
+                handleLogOut={handleLogOut}
                 className="footer" />
         </div>
     );

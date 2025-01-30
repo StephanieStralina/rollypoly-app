@@ -2,15 +2,29 @@
 
 import './DiceFormula.css';
 
-export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas, onClickHandler }) {
+export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas, onClickHandler, selectedGroup, handleGroupFilterChange, groupList, formula }) {
 
     return (
         <div className='dice-formulas'>
+            
             {user ? (
-                    formulas.map((formula) => (
+                <>
+                <div>
+                      <label>Filter by Group:</label>
+                      <select value={selectedGroup} onChange={handleGroupFilterChange}>
+                        <option value="All Formulas">All Formulas</option>
+                        {groupList.map((group) => (
+                          <option key={group._id} value={group._id}>
+                            {group.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    {formulas.map((formula) => (
                         <button key={formula._id} className='dice-formula-btn'
                         onClick={() => onClickHandler(formula)} >{formula.name}</button>
-                    ))
+                    ))}
+                </>
             ) : (
                 <>
                     <button className="dice-formula-btn" onClick={() => setDemoRoll(1, 20, 5, 'formula')}>Demo - Roll to Attack</button>

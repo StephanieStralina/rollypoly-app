@@ -23,6 +23,8 @@ export default function App() {
   const [selectedFormula, setSelectedFormula] = useState(null);
   const [groupList, setGroupList] = useState([]);
   const [newGroup, setNewGroup] = useState('');
+  const [filteredFormulas, setFilteredFormulas] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState('All Formulas');
   const navigate = useNavigate();
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
@@ -31,6 +33,7 @@ export default function App() {
     const fetchUserFormulas = async () => {
       const formulasData = await formulaService.index();
       setFormulas(formulasData);
+      setFilteredFormulas(formulasData);
     };
     const fetchGroups = async () => {
       try {
@@ -45,6 +48,14 @@ export default function App() {
         fetchGroups();
       }
     }, [user, formulas.length]);
+
+  useEffect(() => {
+      if (selectedGroup === 'All Formulas') {
+        setFilteredFormulas(formulas);
+      } else {
+        setFilteredFormulas(formulas.filter(formula => formula.group && formula.group._id === selectedGroup));
+      }
+    }, [selectedGroup, formulas]);
 
 
   function handleLogOut() {
@@ -99,6 +110,12 @@ export default function App() {
     }
   };
 
+  const handleGroupFilterChange = (evt) => {
+    setSelectedGroup(evt.target.value);
+  };
+
+
+
   return (
     <main className="App">
       <section id="main-section">  
@@ -120,7 +137,7 @@ export default function App() {
                 setUser={setUser}
                 handleLogOut={handleLogOut}
                 die={die}
-                formulas={formulas}
+                formulas={filteredFormulas}
                 addFormula={addFormula}
                 toggleModal={toggleModal}
                 modalIsOpen={modalIsOpen}
@@ -128,6 +145,8 @@ export default function App() {
                 newGroup={newGroup}
                 handleNewGroupChange={handleNewGroupChange}
                 handleAddNewGroup={handleAddNewGroup}
+                selectedGroup={selectedGroup}
+                handleGroupFilterChange={handleGroupFilterChange}
               />
             ) : (
               <Navigate to="/" replace />
@@ -150,7 +169,7 @@ export default function App() {
                 user={user}
                 setUser={setUser}
                 handleLogOut={handleLogOut}
-                formulas={formulas}
+                formulas={filteredFormulas}
                 setFormulas={setFormulas}
                 addFormula={addFormula}
                 toggleModal={toggleModal}
@@ -164,6 +183,8 @@ export default function App() {
                 newGroup={newGroup}
                 handleNewGroupChange={handleNewGroupChange}
                 handleAddNewGroup={handleAddNewGroup}
+                selectedGroup={selectedGroup}
+                handleGroupFilterChange={handleGroupFilterChange}
               />
             ) : (
               <Navigate to="/" replace />
