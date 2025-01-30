@@ -7,7 +7,7 @@ export default function DiceForm({rollForm, handleChange}) {
 
     return (
         <>
-        <form>
+        <form className='roll-form'>
             <input type="number" name="numDice" value={rollForm.numDice} onChange={handleChange} required/>
             <input type="number" name="diceSides" value={rollForm.diceSides} onChange={handleChange} required />
             <input type="number" name="modifier" value={rollForm.modifier} onChange={handleChange} required />
