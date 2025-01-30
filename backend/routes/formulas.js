@@ -11,10 +11,8 @@ router.post('/', formulaCtrl.createFormula)
 //INDEX /dashboard, formulaCtrl.index
 router.get('/', formulaCtrl.index)
 
-// Paths for '/api/formulas'
-
 //SHOW /formulas/:formulaID, formulaCtrl.show
-router.get('/formlas/:formulaId', formulaCtrl.show)
+router.get('/:formulaId', formulaCtrl.show)
 
 //UPDATE /formulas/:formulaID, formulaCtrl.update
 router.put('/:formulaId', formulaCtrl.update)

@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import * as formulaService from '../../services/formulaService';
+import * as groupService from '../../services/groupService'
 import './FormulaModal.css'
 
-export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula, handleUpdateFormula, handleDeleteFormula }) {
+export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula, handleUpdateFormula, handleDeleteFormula, groupList, newGroup, handleNewGroupChange, handleAddNewGroup }) {
 
     const [formulaData, setFormulaData] = useState({
         name: '',
@@ -24,20 +25,21 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                 group: 'None',
             });
             return;
-        }
+        } else {
         const controller = new AbortController(); 
         const fetchFormula = async () => {
             try {
                 const formulaDetails = await formulaService.show(formulaId, { signal: controller.signal });
-                setFormulaData(formulaDetails);
+                setFormulaData({...formulaDetails,
+                    group: formulaDetails.group._id,
+                });
             } catch (error) {
                 if (error.name !== 'AbortError') {
                     console.error("Error fetching formula:", error);
                 }
             }
-        };
-        fetchFormula();
-        return () => {
+            }
+            fetchFormula();
         };
     }, [formulaId, modalIsOpen]);
 
@@ -110,16 +112,36 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                         Modifier:
                         <input type="number" name="modifier" value={formulaData.modifier} onChange={onChange} required />
                     </label>
+                    
                     <label>
-                        Collection:
+                        Group:
                         <select
                             name="group"
                             value={formulaData.group}
                             onChange={onChange}
                         >
-                            <option value="None">None</option>
+                            <option value="">Select a group</option>
+                            {groupList.map((group) => (
+                                <option key={group._id} value={group._id}>
+                                    {group.name}
+                                </option>
+                            ))}
                         </select>
                     </label>
+
+                    {/* New Group Input */}
+                    <label>
+                        Add New Group:
+                        <input
+                            type="text"
+                            value={newGroup}
+                            onChange={handleNewGroupChange}
+                            placeholder="Enter new group"
+                        />
+                        <button type="button" onClick={handleAddNewGroup}>Add Group</button>
+                    </label>
+
+
                     <button type="submit">{formulaId ? ('Update Formula') : ('Save Formula')}</button>
                 </form>
                 {formulaId ? (<button type="delete" onClick={() => handleDeleteFormula(formulaId)}>Delete</button>) : ""}

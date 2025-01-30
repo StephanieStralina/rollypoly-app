@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router';
 import { getUser, logOut } from '../../services/authService';
 import * as formulaService from '../../services/formulaService';
+import * as groupService from '../../services/groupService';
 import './App.css';
 import LandingPage from '../LandingPage/LandingPage';
 import RollerPage from '../RollerPage/RollerPage';
@@ -20,6 +21,8 @@ export default function App() {
   const [formulas, setFormulas] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedFormula, setSelectedFormula] = useState(null);
+  const [groupList, setGroupList] = useState([]);
+  const [newGroup, setNewGroup] = useState('');
   const navigate = useNavigate();
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
@@ -29,14 +32,26 @@ export default function App() {
       const formulasData = await formulaService.index();
       setFormulas(formulasData);
     };
-    if (user) fetchUserFormulas();
-  }, [formulas.length]);
+    const fetchGroups = async () => {
+      try {
+        const groups = await groupService.indexGroups();
+        setGroupList(groups);
+      } catch (error) {
+        console.error("Error fetching groups:", error);
+      }
+    };
+      if (user) {
+        fetchUserFormulas();
+        fetchGroups();
+      }
+    }, [user, formulas.length]);
 
 
   function handleLogOut() {
     logOut();
     setUser(null);
     setFormulas([]);
+    setGroups([]);
     navigate('/');
   }
 
@@ -44,8 +59,6 @@ export default function App() {
     setSelectedFormula(null);
     toggleModal(); 
 };
-
-  //TODO: Add onClick change die and dieImg for rolls
 
   const addFormula = async (formattedFormulaData) => {
     const newFormula = await formulaService.createFormula(formattedFormulaData);
@@ -70,14 +83,34 @@ export default function App() {
     }
   };
 
+  const handleNewGroupChange = (evt) => {
+    setNewGroup(evt.target.value);
+  };
+
+  const handleAddNewGroup = async () => {
+    if (newGroup) {
+      try {
+        const group = await groupService.createGroup({ name: newGroup });
+        setGroupList([...groupList, group]);
+        setNewGroup('');
+      } catch (error) {
+        console.error("Error creating new group:", error);
+      }
+    }
+  };
+
   return (
     <main className="App">
       <section id="main-section">  
 
           <Routes>
-          <Route path="/" element={user ? (<Navigate to="/dashboard" replace />) : (<LandingPage user={user} setUser={setUser} die={die} />)} />
-          <Route path="/demo" element={<RollerPage die={die} />} />
-          <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
+          <Route path="/" element={
+              user ? (<Navigate to="/dashboard" replace />) 
+              : (<LandingPage user={user} setUser={setUser} die={die} />)} />
+          <Route path="/demo" element={
+              <RollerPage die={die} />} />
+          <Route path="/signup" element={
+            <SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LogInPage setUser={setUser} />} />
 
           <Route path="/dashboard"
@@ -90,7 +123,11 @@ export default function App() {
                 formulas={formulas}
                 addFormula={addFormula}
                 toggleModal={toggleModal}
-                modalIsOpen = {modalIsOpen}
+                modalIsOpen={modalIsOpen}
+                groupList={groupList}
+                newGroup={newGroup}
+                handleNewGroupChange={handleNewGroupChange}
+                handleAddNewGroup={handleAddNewGroup}
               />
             ) : (
               <Navigate to="/" replace />
@@ -123,6 +160,10 @@ export default function App() {
                 setSelectedFormula={setSelectedFormula}
                 handleUpdateFormula={handleUpdateFormula}
                 handleDeleteFormula={handleDeleteFormula}
+                groupList={groupList}
+                newGroup={newGroup}
+                handleNewGroupChange={handleNewGroupChange}
+                handleAddNewGroup={handleAddNewGroup}
               />
             ) : (
               <Navigate to="/" replace />

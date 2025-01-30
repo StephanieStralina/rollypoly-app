@@ -20,8 +20,9 @@ const formulaSchema = new Schema(
         required: true, 
       },
       group: {
-        type: String,
-        enum: ['None', 'Create Collection'],
+        type: Schema.Types.ObjectId,
+        ref: 'Group',
+        required: true,
       },
       createdBy: {
         type: Schema.Types.ObjectId,

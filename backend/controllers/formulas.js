@@ -1,5 +1,6 @@
 //controllers/formulas.js
 const Formula = require('../models/formula');
+const Group = require('../models/group');
 
 module.exports = {
   createFormula,
@@ -22,13 +23,13 @@ async function createFormula(req, res) {
 }
 
 async function index(req, res) {
-  const formulas = await Formula.find({ createdBy: req.user._id })
+  const formulas = await Formula.find({ createdBy: req.user._id }).populate('group');
   res.status(200).json(formulas);
 }
 
 async function show(req, res) {
   try {
-    const formula = await Formula.findById(req.params.formulaId);
+    const formula = await Formula.findById(req.params.formulaId).populate('group');
     res.status(200).json(formula);
   } catch (e) {
     console.log(e);
@@ -47,7 +48,7 @@ async function update(req, res) {
       req.params.formulaId,
       req.body,
       { new: true }
-    );
+    ).populate('group');
 
     updatedFormula._doc.createdBy = req.user._id;
     res.status(200).json(updatedFormula);
