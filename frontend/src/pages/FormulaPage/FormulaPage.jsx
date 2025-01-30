@@ -9,7 +9,7 @@ import addImg from '../../assets/images/addImg.png';
 
 export default function FormulaPage({ formulas, user, setUser, handleLogOut, 
     toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula, 
-    setSelectedFormula, handleUpdateFormula, handleDeleteFormula,
+    setSelectedFormula, handleUpdateFormula, handleDeleteFormula, formulaData, setFormulaData,
     groupList, newGroup, handleNewGroupChange, handleAddNewGroup, 
     selectedGroup, handleGroupFilterChange }) {
 
@@ -45,7 +45,9 @@ export default function FormulaPage({ formulas, user, setUser, handleLogOut,
             groupList={groupList}
             newGroup={newGroup}
             handleNewGroupChange={handleNewGroupChange}
-            handleAddNewGroup={handleAddNewGroup} />
+            handleAddNewGroup={handleAddNewGroup}
+            formulaData={formulaData}
+            setFormulaData={setFormulaData} />
         <AppFooter 
             user={user} 
             setUser={setUser} 

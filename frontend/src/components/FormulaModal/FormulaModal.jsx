@@ -1,20 +1,12 @@
 //FormulaModal.jsx
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import * as formulaService from '../../services/formulaService';
-import * as groupService from '../../services/groupService'
 import './FormulaModal.css'
 
-export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, handleModalClose, setSelectedFormula, handleUpdateFormula, handleDeleteFormula, groupList, newGroup, handleNewGroupChange, handleAddNewGroup }) {
+export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, formulaData, setFormulaData, handleModalClose, setSelectedFormula, handleUpdateFormula, handleDeleteFormula, groupList, newGroup, handleNewGroupChange, handleAddNewGroup }) {
 
-    const [formulaData, setFormulaData] = useState({
-        name: '',
-        numDice: 1,
-        diceSides: 20,
-        modifier: 0,
-        group: 'None',
-    })
-    
+
     useEffect(() => {
         if (!formulaId) {
             setFormulaData({
@@ -22,33 +14,43 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                 numDice: 1,
                 diceSides: 20,
                 modifier: 0,
-                group: 'None',
+                group: null,
             });
             return;
         } else {
-        const controller = new AbortController(); 
-        const fetchFormula = async () => {
-            try {
-                const formulaDetails = await formulaService.show(formulaId, { signal: controller.signal });
-                setFormulaData({...formulaDetails,
-                    group: formulaDetails.group._id,
-                });
-            } catch (error) {
-                if (error.name !== 'AbortError') {
-                    console.error("Error fetching formula:", error);
+            const controller = new AbortController();
+            const fetchFormula = async () => {
+                try {
+                    const formulaDetails = await formulaService.show(formulaId, { signal: controller.signal });
+                    setFormulaData({
+                        ...formulaDetails,
+                        group: formulaDetails.group ? formulaDetails.group._id : null,
+                    });
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        console.error("Error fetching formula:", error);
+                    }
                 }
-            }
             }
             fetchFormula();
         };
     }, [formulaId, modalIsOpen]);
 
 
-    function onChange(evt){
-        setFormulaData({
-            ...formulaData,
-            [evt.target.name]: evt.target.value,
-        });
+    function onChange(evt) {
+        const { name, value } = evt.target;
+
+        if (name === 'group') {
+            setFormulaData({
+                ...formulaData,
+                [name]: value === 'None' ? null : value,
+            });
+        } else {
+            setFormulaData({
+                ...formulaData,
+                [name]: value,
+            });
+        }
     }
 
     async function submitFormula(evt) {
@@ -58,20 +60,21 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
             numDice: Number(formulaData.numDice),
             diceSides: Number(formulaData.diceSides),
             modifier: Number(formulaData.modifier),
+            group: formulaData.group || null,
         };
         if (formulaId) {
             try {
-            await handleUpdateFormula(formulaId, formattedFormulaData);
+                await handleUpdateFormula(formulaId, formattedFormulaData);
             } catch (e) {
                 console.error('Error submitting formula:', e);
             }
-          } else {
+        } else {
             try {
-                await addFormula(formattedFormulaData) 
+                await addFormula(formattedFormulaData)
             } catch (e) {
                 console.error('Error submitting formula:', e);
             }
-          }
+        }
         setFormulaData({
             name: '',
             numDice: 1,
@@ -79,12 +82,12 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
             modifier: 0,
             group: 'None',
         });
-        handleModalClose();
+        handleModalClose;
     }
 
     if (!modalIsOpen) return null;
 
-    
+
 
     return (
         <div className="modal-overlay" onClick={formulaId ? handleModalClose : toggleModal}>
@@ -92,9 +95,9 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                 <button className="close-btn" onClick={formulaId ? handleModalClose : toggleModal}>×</button>
                 {formulaId ? (
                     <h2>Edit Formula</h2>
-            ) : (
-            <h2>Add New Formula</h2>
-            )}
+                ) : (
+                    <h2>Add New Formula</h2>
+                )}
                 <form onSubmit={submitFormula}>
                     <label>
                         Formula Name:
@@ -112,7 +115,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                         Modifier:
                         <input type="number" name="modifier" value={formulaData.modifier} onChange={onChange} required />
                     </label>
-                    
+
                     <label>
                         Group:
                         <select
@@ -120,7 +123,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                             value={formulaData.group}
                             onChange={onChange}
                         >
-                            <option value="">Select a group</option>
+                            <option value="None">None</option>
                             {groupList.map((group) => (
                                 <option key={group._id} value={group._id}>
                                     {group.name}
@@ -129,7 +132,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                         </select>
                     </label>
 
-                    {/* New Group Input */}
+
                     <label>
                         Add New Group:
                         <input

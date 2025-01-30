@@ -8,6 +8,7 @@ module.exports = {
 
 async function createGroup(req, res) {
     try {
+        req.body.createdBy = req.user._id;
         const group = await Group.create(req.body);
         res.status(201).json(group);
     } catch (e) {
@@ -18,7 +19,7 @@ async function createGroup(req, res) {
 
 async function indexGroups(req, res) {
     try {
-        const groups = await Group.find();
+        const groups = await Group.find({ createdBy: req.user._id });
         res.status(200).json(groups);
     } catch (e) {
         console.log(e);

@@ -14,7 +14,7 @@ import addImg from '../../assets/images/addImg.png';
 
 
 export default function RollerPage({ user,
-    setUser, handleLogOut, die, formulas, addFormula,
+    setUser, handleLogOut, die, formulas, addFormula, formulaData, setFormulaData,
     toggleModal, modalIsOpen, setUserRoll,
     groupList, newGroup, handleNewGroupChange, handleAddNewGroup, handleGroupFilterChange, selectedGroup }) {
     const [rolledNumber, setRolledNumber] = useState(null);
@@ -190,7 +190,9 @@ export default function RollerPage({ user,
                 groupList={groupList}
                 newGroup={newGroup}
                 handleNewGroupChange={handleNewGroupChange}
-                handleAddNewGroup={handleAddNewGroup} />
+                handleAddNewGroup={handleAddNewGroup}
+                formulaData={formulaData}
+                setFormulaData={setFormulaData} />
 
             <AppFooter
                 user={user}

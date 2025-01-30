@@ -25,6 +25,13 @@ export default function App() {
   const [newGroup, setNewGroup] = useState('');
   const [filteredFormulas, setFilteredFormulas] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState('All Formulas');
+  const [formulaData, setFormulaData] = useState({
+    name: '',
+    numDice: 1,
+    diceSides: 20,
+    modifier: 0,
+    group: null,
+})
   const navigate = useNavigate();
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
@@ -38,6 +45,7 @@ export default function App() {
     const fetchGroups = async () => {
       try {
         const groups = await groupService.indexGroups();
+        console.log("Fetched groups:", groups); 
         setGroupList(groups);
       } catch (error) {
         console.error("Error fetching groups:", error);
@@ -80,7 +88,7 @@ export default function App() {
   const handleUpdateFormula = async (formulaId, formattedFormulaData) => {
     const updatedFormula = await formulaService.update(formulaId, formattedFormulaData);
     setFormulas(formulas.map((formula) => (formulaId === formula._id ? updatedFormula : formula)));
-    navigate('/formulas');
+    handleModalClose();
   };
 
   const handleDeleteFormula = async (formulaId) => {
@@ -104,6 +112,7 @@ export default function App() {
         const group = await groupService.createGroup({ name: newGroup });
         setGroupList([...groupList, group]);
         setNewGroup('');
+        setFormulaData(formulaData => ({...formulaData, group: group._id || null}))
       } catch (error) {
         console.error("Error creating new group:", error);
       }
@@ -147,6 +156,8 @@ export default function App() {
                 handleAddNewGroup={handleAddNewGroup}
                 selectedGroup={selectedGroup}
                 handleGroupFilterChange={handleGroupFilterChange}
+                formulaData={formulaData}
+                setFormulaData={setFormulaData}
               />
             ) : (
               <Navigate to="/" replace />
@@ -185,6 +196,8 @@ export default function App() {
                 handleAddNewGroup={handleAddNewGroup}
                 selectedGroup={selectedGroup}
                 handleGroupFilterChange={handleGroupFilterChange}
+                formulaData={formulaData}
+                setFormulaData={setFormulaData}
               />
             ) : (
               <Navigate to="/" replace />

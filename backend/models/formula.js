@@ -22,7 +22,6 @@ const formulaSchema = new Schema(
       group: {
         type: Schema.Types.ObjectId,
         ref: 'Group',
-        required: true,
       },
       createdBy: {
         type: Schema.Types.ObjectId,
