@@ -66,12 +66,12 @@ export default function App() {
     }, [selectedGroup, formulas]);
 
 
-  function handleLogOut() {
+  async function handleLogOut() {
     logOut();
     setUser(null);
     setFormulas([]);
-    setGroups([]);
-    navigate('/', { replace: true });
+    setGroupList([]);
+    navigate('/');
   }
 
   const handleModalClose = () => {
