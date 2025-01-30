@@ -5,5 +5,30 @@
     height: 8vmin;
     padding-right: 5vmin;
     padding-top: 2vmin;
+    z-index: 5;
+    position: relative;
 }
 
+.hamburger-nav img {
+    z-index: 15;
+    width: 4vmin;
+    height: 4vmin;
+    position: absolute;
+    top: 2vmin;
+    right: 2.5vmin;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: -10vmin;
+    right: 0;
+    width: 30%;
+    height: 110vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: hidden; /* Allow scrolling if the content overflows */
+    z-index: 10;
+    padding-top: 10vmin;
+}

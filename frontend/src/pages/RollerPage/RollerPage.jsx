@@ -11,6 +11,7 @@ import DiceFormula from "../../components/DiceFormula/DiceFormula";
 import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
 import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import addImg from '../../assets/images/addImg.png';
+import RollyPolyLogoV2 from '../../assets/images/RollyPolyLogoV2.png';
 
 
 export default function RollerPage({ user,
@@ -135,69 +136,66 @@ export default function RollerPage({ user,
 
     return (
         <div className="roller-page">
-            <HamburgerNav
-                demoHistory={demoHistory}
-                userHistory={userHistory}
-                user={user} />
-            <h1>Home Page</h1>
-            <div>Dice Clicking Images Here</div>
-            <DieImg
-                rollDice={rollDice}
-                rolledNumber={rolledNumber}
-                die={die} />
-            <div>{resultMessage}</div>
-            <DiceForm rollForm={rollForm} handleChange={handleChange} />
-            {user ?
-                (
-                    <>
-                        <DiceFormula
-                            user={user}
-                            formulas={formulas}
-                            setUserRoll={setUserRoll}
-                            onClickHandler={setUserRoll}
-                            selectedGroup={selectedGroup}
-                            handleGroupFilterChange={handleGroupFilterChange}
-                            groupList={groupList} />
-                    </>
-                ) : (
-                    <>
-                        <DiceFormula
-                            setDemoRoll={setDemoRoll}
-                            onClickHandler={setDemoRoll} />
-                    </>
-                )}
-            {user ?
-                (
-                    <div className="add-formula-btn" onClick={toggleModal}>
-                        <img src={addImg}
-                            style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
-                        <span>Click to add formula</span>
-                    </div>
-                ) : (
-                    <>
-                        <img src={addImg}
-                            style={{ maxWidth: '10vmin', maxHeight: '10vmin', margin: '4vmin' }}></img>
-                        <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
-                    </>
-                )
-            }
-            <FormulaModal
-                modalIsOpen={modalIsOpen}
-                toggleModal={toggleModal}
-                user={user}
-                addFormula={addFormula}
-                groupList={groupList}
-                newGroup={newGroup}
-                handleNewGroupChange={handleNewGroupChange}
-                handleAddNewGroup={handleAddNewGroup}
-                formulaData={formulaData}
-                setFormulaData={setFormulaData} />
+                <HamburgerNav
+                    demoHistory={demoHistory}
+                    userHistory={userHistory}
+                    user={user} />
+            <div className="backdrop">
+                <img src={RollyPolyLogoV2} style={{ maxHeight: '9vmin', paddingTop: '1.5vmin' }} alt="A picture of a green logo reading RollyPolly" />
+                <div>Dice Clicking Images Here</div>
+                <DieImg
+                    rollDice={rollDice}
+                    rolledNumber={rolledNumber}
+                    die={die} />
+                <div>{resultMessage}</div>
+                <DiceForm rollForm={rollForm} handleChange={handleChange} />
+                {user ?
+                    (
+                        <>
+                            <DiceFormula
+                                user={user}
+                                formulas={formulas}
+                                setUserRoll={setUserRoll}
+                                onClickHandler={setUserRoll}
+                                selectedGroup={selectedGroup}
+                                handleGroupFilterChange={handleGroupFilterChange}
+                                groupList={groupList} />
+                        </>
+                    ) : (
+                        <>
+                            <DiceFormula
+                                setDemoRoll={setDemoRoll}
+                                onClickHandler={setDemoRoll} />
+                        </>
+                    )}
+                {user ?
+                    (
+                        <div className="add-formula-btn" onClick={toggleModal}>
+                            <img src={addImg}
+                                style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
+                            <span>Click to add formula</span>
+                        </div>
+                    ) : (
+                        <>
+                            <img src={addImg}
+                                style={{ maxWidth: '10vmin', maxHeight: '10vmin', margin: '4vmin' }}></img>
+                            <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
+                        </>
+                    )
+                }
+                <FormulaModal
+                    modalIsOpen={modalIsOpen}
+                    toggleModal={toggleModal}
+                    user={user}
+                    addFormula={addFormula}
+                    groupList={groupList}
+                    newGroup={newGroup}
+                    handleNewGroupChange={handleNewGroupChange}
+                    handleAddNewGroup={handleAddNewGroup}
+                    formulaData={formulaData}
+                    setFormulaData={setFormulaData} />
 
-            <AppFooter
-                user={user}
-                setUser={setUser}
-                handleLogOut={handleLogOut}
-                className="footer" />
+            </div>
         </div>
     );
 }

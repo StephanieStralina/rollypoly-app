@@ -23,7 +23,7 @@ export default function AppFooter({user, setUser, handleLogOut}) {
                 <>
           <NavLink to="/login">Log In</NavLink>
           &nbsp; | &nbsp;
-          <NavLink to="/signup">Sign Up</NavLink>
+          <NavLink to="/sign-up">Sign Up</NavLink>
           &nbsp; | &nbsp;
           <NavLink to="/">Home</NavLink>
         </>

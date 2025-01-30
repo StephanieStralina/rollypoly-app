@@ -7,10 +7,10 @@ import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import './FormulaPage.css';
 import addImg from '../../assets/images/addImg.png';
 
-export default function FormulaPage({ formulas, user, setUser, handleLogOut, 
-    toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula, 
+export default function FormulaPage({ formulas, user, setUser, handleLogOut,
+    toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula,
     setSelectedFormula, handleUpdateFormula, handleDeleteFormula, formulaData, setFormulaData,
-    groupList, newGroup, handleNewGroupChange, handleAddNewGroup, 
+    groupList, newGroup, handleNewGroupChange, handleAddNewGroup,
     selectedGroup, handleGroupFilterChange }) {
 
     const handleFormulaClick = (formula) => {
@@ -20,39 +20,41 @@ export default function FormulaPage({ formulas, user, setUser, handleLogOut,
 
     return (
         <div className="formula-page">
-        <h2>Formula Page</h2>
-            <div className="add-formula-btn" onClick={toggleModal}>
-            <img src={addImg} style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
-            <span>Click to add formula</span>
-        </div>
-        <DiceFormula 
-            user={user} 
-            formulas={formulas} 
-            onClickHandler={handleFormulaClick}
-            selectedGroup={selectedGroup}
-            handleGroupFilterChange={handleGroupFilterChange}
-            groupList={groupList} 
-            />
-        <FormulaModal user={user} 
-            addFormula={addFormula} 
-            modalIsOpen={modalIsOpen} 
-            toggleModal={toggleModal} 
-            formulaId={selectedFormula}
-            handleModalClose={handleModalClose}
-            setSelectedFormula={setSelectedFormula}
-            handleUpdateFormula={handleUpdateFormula}
-            handleDeleteFormula={handleDeleteFormula}
-            groupList={groupList}
-            newGroup={newGroup}
-            handleNewGroupChange={handleNewGroupChange}
-            handleAddNewGroup={handleAddNewGroup}
-            formulaData={formulaData}
-            setFormulaData={setFormulaData} />
-        <AppFooter 
-            user={user} 
-            setUser={setUser} 
-            handleLogOut={handleLogOut} 
-            className="footer"/>
+            <div className="backdrop">
+                <h2>Formula Page</h2>
+                <div className="add-formula-btn" onClick={toggleModal}>
+                    <img src={addImg} style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
+                    <span>Click to add formula</span>
+                </div>
+                <DiceFormula
+                    user={user}
+                    formulas={formulas}
+                    onClickHandler={handleFormulaClick}
+                    selectedGroup={selectedGroup}
+                    handleGroupFilterChange={handleGroupFilterChange}
+                    groupList={groupList}
+                />
+                <FormulaModal user={user}
+                    addFormula={addFormula}
+                    modalIsOpen={modalIsOpen}
+                    toggleModal={toggleModal}
+                    formulaId={selectedFormula}
+                    handleModalClose={handleModalClose}
+                    setSelectedFormula={setSelectedFormula}
+                    handleUpdateFormula={handleUpdateFormula}
+                    handleDeleteFormula={handleDeleteFormula}
+                    groupList={groupList}
+                    newGroup={newGroup}
+                    handleNewGroupChange={handleNewGroupChange}
+                    handleAddNewGroup={handleAddNewGroup}
+                    formulaData={formulaData}
+                    setFormulaData={setFormulaData} />
+                <AppFooter
+                    user={user}
+                    setUser={setUser}
+                    handleLogOut={handleLogOut}
+                    className="footer" />
+            </div>
         </div>
     )
 }

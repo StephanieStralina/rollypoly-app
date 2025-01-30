@@ -4,39 +4,39 @@ import { useEffect } from "react";
 import { logOut } from '../../services/authService';
 import './LandingPage.css';
 import AppFooter from "../../components/AppFooter/AppFooter";
+import RollyPolyLogo from '../../assets/images/RollyPolyLogo.png'
 
 
 export default function LandingPage({ user, setUser, die, handleLogOut }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
-    return (
-        <div className="landing-page">
-        <div className="backdrop">
-        <h1>RollyPo.ly</h1>
-        <DieImg die={die}/>
+  return (
+    <div className="landing-page">
+      <div className="backdrop">
+        <img src={RollyPolyLogo} style={{maxHeight: '35vmin'}} alt="A picture of a green logo reading RollyPolly" />
+        <DieImg die={die} alt="A picture of a large 20 sided die with the number 20 in the middle of it" />
         <h3>A Dice Rolling App</h3>
         <nav className="landing-nav">
-      {user ? (
-        <>
-          <Link to="" onClick={handleLogOut}>
-            Log Out
-          </Link>
-          &nbsp; | &nbsp;
-          <span>Welcome, {user.name}</span>
-        </>
-      ) : (
-        <>
-          <NavLink to="/login">Log In</NavLink>
-          &nbsp; | &nbsp;
-          <NavLink to="/signup">Sign Up</NavLink>
-          &nbsp; | &nbsp;
-          <NavLink to="/demo">Demo</NavLink>
-        </>
-      )}
-    </nav>
-    <AppFooter className="footer"/>
+          {user ? (
+            <>
+              <Link to="" onClick={handleLogOut}>
+                Log Out
+              </Link>
+              &nbsp; | &nbsp;
+              <span>Welcome, {user.name}</span>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login">Log In</NavLink>
+              &nbsp; | &nbsp;
+              <NavLink to="/sign-up">Sign Up</NavLink>
+              &nbsp; | &nbsp;
+              <NavLink to="/demo">Demo</NavLink>
+            </>
+          )}
+        </nav>
+      </div>
     </div>
-    </div>
-    );
+  );
 }

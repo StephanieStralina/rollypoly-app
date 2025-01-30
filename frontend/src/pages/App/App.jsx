@@ -31,7 +31,7 @@ export default function App() {
     diceSides: 20,
     modifier: 0,
     group: null,
-})
+  })
   const navigate = useNavigate();
 
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
@@ -45,25 +45,25 @@ export default function App() {
     const fetchGroups = async () => {
       try {
         const groups = await groupService.indexGroups();
-        console.log("Fetched groups:", groups); 
+        console.log("Fetched groups:", groups);
         setGroupList(groups);
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
     };
-      if (user) {
-        fetchUserFormulas();
-        fetchGroups();
-      }
-    }, [user, formulas.length]);
+    if (user) {
+      fetchUserFormulas();
+      fetchGroups();
+    }
+  }, [user, formulas.length]);
 
   useEffect(() => {
-      if (selectedGroup === 'All Formulas') {
-        setFilteredFormulas(formulas);
-      } else {
-        setFilteredFormulas(formulas.filter(formula => formula.group && formula.group._id === selectedGroup));
-      }
-    }, [selectedGroup, formulas]);
+    if (selectedGroup === 'All Formulas') {
+      setFilteredFormulas(formulas);
+    } else {
+      setFilteredFormulas(formulas.filter(formula => formula.group && formula.group._id === selectedGroup));
+    }
+  }, [selectedGroup, formulas]);
 
 
   async function handleLogOut() {
@@ -76,8 +76,8 @@ export default function App() {
 
   const handleModalClose = () => {
     setSelectedFormula(null);
-    toggleModal(); 
-};
+    toggleModal();
+  };
 
   const addFormula = async (formattedFormulaData) => {
     const newFormula = await formulaService.createFormula(formattedFormulaData);
@@ -112,7 +112,7 @@ export default function App() {
         const group = await groupService.createGroup({ name: newGroup });
         setGroupList([...groupList, group]);
         setNewGroup('');
-        setFormulaData(formulaData => ({...formulaData, group: group._id || null}))
+        setFormulaData(formulaData => ({ ...formulaData, group: group._id || null }))
       } catch (error) {
         console.error("Error creating new group:", error);
       }
@@ -127,15 +127,15 @@ export default function App() {
 
   return (
     <main className="App">
-      <section id="main-section">  
+      <section id="main-section">
 
-          <Routes>
+        <Routes>
           <Route path="/" element={
-              user ? (<Navigate to="/dashboard" replace />) 
+            user ? (<Navigate to="/dashboard" replace />)
               : (<LandingPage user={user} setUser={setUser} die={die} />)} />
           <Route path="/demo" element={
-              <RollerPage die={die} setFormulaData={setFormulaData} />} />
-          <Route path="/signup" element={
+            <RollerPage die={die} setFormulaData={setFormulaData} />} />
+          <Route path="/sign-up" element={
             <SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LogInPage setUser={setUser} />} />
 
@@ -203,7 +203,7 @@ export default function App() {
               <Navigate to="/" replace />
             )}
           />
-         </Routes>
+        </Routes>
       </section>
     </main>
   );
