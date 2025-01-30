@@ -4,7 +4,7 @@ import './HamburgerNav.css'
 import hamburgerImg from '../../assets/images/hamburgerImg.png'
 import closeImg from '../../assets/images/closeImg.png'
 
-export default function HamburgerNav({ demoHistory, user }) {
+export default function HamburgerNav({ demoHistory, user, userHistory }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -25,6 +25,11 @@ export default function HamburgerNav({ demoHistory, user }) {
                     <li><NavLink to='/formulas'>Formulas</NavLink></li>
                     <div>
                         <h3>User History</h3>
+                        {userHistory.map((roll, index) => (
+                            <li key={index}>
+                                {`Result: ${roll.result} - Dice: ${roll.numDice}d${roll.diceSides} - Mod: ${roll.modifier}`}
+                            </li>
+                        ))}
                     </div>
                         </>
                     ):(

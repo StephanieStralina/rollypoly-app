@@ -4,6 +4,16 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;
 
+const rollHistorySchema = new Schema({
+  result: Number,
+  numDice: Number,
+  diceSides: Number,
+  modifier: Number,
+  source: String,
+  formula: Schema.Types.ObjectId,
+  createdBy: Schema.Types.ObjectId,
+});
+
 const userSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -18,10 +28,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    rollHistory: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Input',
-    }]
+    rollHistory: [rollHistorySchema]
   },
   {
     timestamps: true,

@@ -24,9 +24,17 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
         formula: null,
     });
     const [demoHistory, setDemoHistory] = useState([]);
-    const [userHistory, setUserHistory] = useState(null);
+    const [userHistory, setUserHistory] = useState([]);
 
-    //Use effect to populate formulas for user
+  
+    
+    useEffect(() => {
+        const fetchUserHistory = async () => {
+          const userHistoryData = await rollService.index();
+          setUserHistory(userHistoryData);
+        };
+        if (user) fetchUserHistory();
+      }, [userHistory]);
 
     function setDemoRoll(numDice, diceSides, modifier, source) {
         setResultMessage("Now try clicking the dice to roll them!");
@@ -108,31 +116,24 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
                 };
 
                 let input = await rollService.findRoller(user._id);
-                console.log("Find Roller Response:", input);
 
                 if (!input) {
-                    console.log('No roller found');
                     input = await rollService.initializeRoller(completeUserRoll);
-                    console.log('Roller created:', input);
                 } else {
-                    console.log('Roller found, updating');
                     input = await rollService.initializeRoller(completeUserRoll);
-                    console.log('Roller updated:', input);
                 }
             }
         }, 500);
-
-        //Function to add roll object to user history
     }
 
     function formulaModal() {
 
     }
-    //TODO add screen sizing so that HamburgerMenu only displays on mobile
+    //TODO add screen sizing so that HamburgerMenu only displays on mobile and other menu displays on desktop
 
     return (
         <div className="roller-page">
-            <HamburgerNav demoHistory={demoHistory} user={user} />
+            <HamburgerNav demoHistory={demoHistory} userHistory={userHistory} user={user} />
             <h1>Home Page</h1>
             <div>Dice Clicking Images Here</div>
             <DieImg rollDice={rollDice} rolledNumber={rolledNumber} die={die} />
