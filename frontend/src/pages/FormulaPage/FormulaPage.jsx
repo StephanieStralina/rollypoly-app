@@ -1,3 +1,5 @@
+//FormulaPage.jsx
+
 import { useState } from "react";
 import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceFormula from "../../components/DiceFormula/DiceFormula";

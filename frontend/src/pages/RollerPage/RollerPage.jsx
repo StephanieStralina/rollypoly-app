@@ -1,7 +1,9 @@
+//RollerPage.jsx
 import DieImg from "../../components/DieImg/DieImg";
 import { NavLink, Link, useNavigate } from 'react-router';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as rollService from '../../services/rollService';
+import * as formulaService from '../../services/formulaService';
 import './RollerPage.css'
 import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceForm from "../../components/DiceForm/DiceForm";
@@ -57,6 +59,7 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
         });
     }
 
+
     async function rollDice() {
         const interval = setInterval(() => {
             setRolledNumber(Math.floor(Math.random() * rollForm.diceSides) + 1);
@@ -100,29 +103,21 @@ export default function RollerPage({ user, setUser, handleLogOut, die, formulas,
                     diceSides: rollForm.diceSides,
                     modifier: rollForm.modifier,
                     source: rollForm.source,
-                    formula: rollForm.formula || null,  // formula id
-                    createdBy: user._id,
+                    formula: rollForm.formula,
+                    userId: user._id,
                 };
+
                 let input = await rollService.findRoller(user._id);
-                if (input && input.length === 0) {
-                    console.log('no roller found');
+                console.log("Find Roller Response:", input);
+
+                if (!input) {
+                    console.log('No roller found');
                     input = await rollService.initializeRoller(completeUserRoll);
-                    user.rollHistory.push(input._id);
-                    await user.save();
+                    console.log('Roller created:', input);
                 } else {
-                    console.log('input found:', input);
-                    input.result = finalResult;
-                    input.numDice = rollForm.numDice;
-                    input.diceSides = rollForm.diceSides;
-                    input.modifier = rollForm.modifier;
-                    input.source = rollForm.source;
-                    input.formula = rollForm.formula || null;
-                    await input.save();
-                    if (user.rollHistory.length >= 10) {
-                        user.rollHistory = user.rollHistory.slice(1);
-                    }
-                    user.rollHistory.push(input._id);
-                    await user.save();
+                    console.log('Roller found, updating');
+                    input = await rollService.initializeRoller(completeUserRoll);
+                    console.log('Roller updated:', input);
                 }
             }
         }, 500);

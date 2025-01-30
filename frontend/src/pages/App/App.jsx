@@ -1,3 +1,5 @@
+//App.jsx
+
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router';
 import { getUser, logOut } from '../../services/authService';

@@ -1,3 +1,4 @@
+//DieImg.jsx
 import { useState } from 'react';
 import dieImg from '../../assets/images/dieImg.png';
 import './DieImg.css'

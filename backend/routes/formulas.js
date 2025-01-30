@@ -1,24 +1,25 @@
+//routes/formulas.js
 const express = require('express');
 const router = express.Router();
 const formulaCtrl = require('../controllers/formulas');
 
-// Paths for '/api/dashboard'
+// Paths for '/api/formulas'
 
 // POST /dashboard, formulaCtrl.createFormula
-router.post('/dashboard', formulaCtrl.createFormula)
+router.post('/', formulaCtrl.createFormula)
 
 //INDEX /dashboard, formulaCtrl.index
-router.get('/dashboard', formulaCtrl.index)
+router.get('/', formulaCtrl.index)
 
 // Paths for '/api/formulas'
 
 //SHOW /formulas/:formulaID, formulaCtrl.show
-router.get('/formulas/:formulaId', formulaCtrl.show)
+router.get('/formlas/:formulaId', formulaCtrl.show)
 
 //UPDATE /formulas/:formulaID, formulaCtrl.update
-router.put('/formulas/:formulaId', formulaCtrl.update)
+router.put('/:formulaId', formulaCtrl.update)
 
 //DELETE /formulas/:fomulaID, formulaCtrl.deleteFormula
-router.delete('/formulas/:formulaId', formulaCtrl.deleteFormula)
+router.delete('/:formulaId', formulaCtrl.deleteFormula)
 
 module.exports = router;

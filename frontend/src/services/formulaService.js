@@ -1,7 +1,7 @@
+//formulaService.js
 import sendRequest from "./sendRequest";
 
-const BASE_URL = '/api/dashboard';
-const BASE_URL2 = '/api/formulas';
+const BASE_URL = '/api/formulas';
 
 export async function createFormula(formattedFormulaData) {
     return sendRequest(BASE_URL, 'POST',  formattedFormulaData );
@@ -17,7 +17,7 @@ export async function index(formulasData) {
 
 export async function show(formulaId) {
     try {
-        return sendRequest(`${BASE_URL2}/${formulaId}`);
+        return sendRequest(`${BASE_URL}/${formulaId}`);
     } catch (e) {
         console.log(e);
     }
@@ -25,7 +25,7 @@ export async function show(formulaId) {
 
 export async function update(formulaId, formulasData) {
     try {
-        return sendRequest(`${BASE_URL2}/${formulaId}`, 'PUT', formulasData);
+        return sendRequest(`${BASE_URL}/${formulaId}`, 'PUT', formulasData);
     } catch (e) {
         console.log(e)
     }   
@@ -33,7 +33,7 @@ export async function update(formulaId, formulasData) {
 
 export async function deleteFormula(formulaId, formulasData) {
     try {
-        return sendRequest(`${BASE_URL2}/${formulaId}`, 'DELETE');
+        return sendRequest(`${BASE_URL}/${formulaId}`, 'DELETE');
     } catch (e) {
         console.log(e)
     }

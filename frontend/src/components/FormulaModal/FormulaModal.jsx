@@ -1,3 +1,5 @@
+//FormulaModal.jsx
+
 import { useState, useEffect } from 'react';
 import * as formulaService from '../../services/formulaService';
 import './FormulaModal.css'
