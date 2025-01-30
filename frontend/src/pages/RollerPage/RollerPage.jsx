@@ -177,8 +177,7 @@ export default function RollerPage({ user,
                     <>
                         <img src={addImg}
                             style={{ maxWidth: '10vmin', maxHeight: '10vmin', margin: '4vmin' }}></img>
-                        <span><NavLink to="/sign-up">Sign up</NavLink>
-                            or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
+                        <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
                     </>
                 )
             }

@@ -71,7 +71,7 @@ export default function App() {
     setUser(null);
     setFormulas([]);
     setGroups([]);
-    navigate('/');
+    navigate('/', { replace: true });
   }
 
   const handleModalClose = () => {
