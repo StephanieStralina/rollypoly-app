@@ -114,8 +114,8 @@ export default function App() {
         setGroupList([...groupList, group]);
         setNewGroup('');
         setFormulaData(formulaData => ({ ...formulaData, group: group._id || null }))
-      } catch (error) {
-        console.error("Error creating new group:", error);
+      } catch (e) {
+        console.log("Error creating new group:", e);
       }
     }
   };
