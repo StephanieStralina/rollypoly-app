@@ -1,8 +1,8 @@
 .die-container {
     position: relative;
     text-align: center;
-    max-width: 40vmin;
-    max-height: 40vmin;
+    max-width: 50vmin;
+    max-height: 50vmin;
 }
 
 .die-text {

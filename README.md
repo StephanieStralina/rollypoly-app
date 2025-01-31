@@ -41,10 +41,11 @@ RollPol.ly is a system agnostic dice app for TTRPGs such as *Dungeons & Dragons*
 
 ## Attribution
 
-Dice icons from Lucas Rathgeb of Noun Project
+Dice icons from Lucas Rathgeb of Noun Project.
 
 ## Next Steps
 - Add option to remove groups or edit groups
 - Add option to color code formula for quick visual reference
 - Add ability to change modifier and existing score after roll
-- Add advantage/disadvantage
+- Add advantage/disadvantage and other roll altering options
+- Add dynamic Dice Roller image

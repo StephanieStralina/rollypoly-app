@@ -188,7 +188,6 @@ export default function App() {
             element={user ? (
               <FormulaPage
                 user={user}
-                setUser={setUser}
                 handleLogOut={handleLogOut}
                 formulas={filteredFormulas}
                 setFormulas={setFormulas}

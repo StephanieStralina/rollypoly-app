@@ -98,7 +98,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                 ) : (
                     <h2>Add New Formula</h2>
                 )}
-                <form onSubmit={submitFormula}>
+                <form className="form-center" onSubmit={submitFormula}>
                     <div className="form-field">
                         <input type="text" name="name" value={formulaData.name} onChange={onChange} required />
                         <label>Formula Name</label>
@@ -111,12 +111,12 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                         <input type="number" name="diceSides" value={formulaData.diceSides} onChange={onChange} required />
                         <label>Dice Sides</label>
                     </div>
-                    <div className="form-field">
+                    <div className="form-field dice-formulas">
                         <input type="number" name="modifier" value={formulaData.modifier} onChange={onChange} required />
                         <label>Modifier</label>
                     </div>
-                    <div className="form-field">
-                        <select name="group" value={formulaData.group} onChange={onChange}>
+                    <div className="form-field dice-formulas" style={{width: '100%', padding: '1.2vmin'}}>
+                        <select className="form-field" style={{width: '100%', padding: '1.2vmin'}} name="group" value={formulaData.group} onChange={onChange}>
                             <option value="None">None</option>
                             {groupList.map((group) => (
                                 <option key={group._id} value={group._id}>
@@ -126,14 +126,14 @@ export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormul
                         </select>
                         <label>Group</label>
                     </div>
-                    <div className="form-field">
+                    <div className="form-field add-group-button">
                         <input type="text" value={newGroup} onChange={handleNewGroupChange} placeholder="Enter new group" />
-                        <button type="button" onClick={handleAddNewGroup} style={{ marginTop: '2vmin'}}>Add Group</button>
+                        <button type="button" onClick={handleAddNewGroup} style={{ marginTop: '2vmin', width: '100%', padding: '1.2vmin'}}>Add Group</button>
                     </div>
-                    <button type="submit" style={{ backgroundColor: '#215A00', borderColor: '#215A00'}}>{formulaId ? 'Update Formula' : 'Save Formula'}</button>
-                    {formulaId && <button type="button" onClick={() => handleDeleteFormula(formulaId)}>Delete</button>}
+                    <button type="submit" style={{ backgroundColor: '#215A00', borderColor: '#215A00', width: '100%', padding: '1.2vmin'}}>{formulaId ? 'Update Formula' : 'Save Formula'}</button>
+                    {formulaId && <button type="button" style={{width: '100%', padding: '1.2vmin'}} onClick={() => handleDeleteFormula(formulaId)}>Delete</button>}
+                    <div>&nbsp;</div>
                 </form>
-                {formulaId ? (<button type="delete" onClick={() => handleDeleteFormula(formulaId)}>Delete</button>) : ""}
             </div>
         </div>
     );

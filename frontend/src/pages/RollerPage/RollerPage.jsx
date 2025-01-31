@@ -3,7 +3,6 @@ import DieImg from "../../components/DieImg/DieImg";
 import { NavLink } from 'react-router';
 import { useState, useEffect, useRef } from "react";
 import * as rollService from '../../services/rollService';
-import * as groupService from '../../services/groupService';
 import './RollerPage.css'
 import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceForm from "../../components/DiceForm/DiceForm";
@@ -12,6 +11,12 @@ import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
 import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import addImg from '../../assets/images/addImg.png';
 import RollyPolyLogoV2 from '../../assets/images/RollyPolyLogoV2.png';
+import d4 from '../../assets/images/d4.png';
+import d6 from '../../assets/images/d6.png';
+import d8 from '../../assets/images/d8.png';
+import d10 from '../../assets/images/d10.png';
+import d12 from '../../assets/images/d12.png';
+import d20 from '../../assets/images/d20.png';
 
 
 export default function RollerPage({ user,
@@ -34,7 +39,6 @@ export default function RollerPage({ user,
         formula: null,
     });
     const topRef = useRef(null);
-    //TODO: Add onClick change die and dieImg for rolls
 
     useEffect(() => {
         async function fetchUserHistory() {
@@ -48,6 +52,15 @@ export default function RollerPage({ user,
 
     function scrollToTop() {
         topRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleDiceSelection(sides) {
+        setRollForm(rollForm => ({
+            ...rollForm,
+            diceSides: sides,
+            source: 'manual',
+            formula: null,
+        }));
     }
 
     function setDemoRoll(numDice, diceSides, modifier, source) {
@@ -148,19 +161,18 @@ export default function RollerPage({ user,
     
     const getRollColor = (number) => {
         if (number === null || number === undefined) {
-            return 'black';  // Default color before rolling
+            return 'black'; 
         }
         if (number >= 20) {
-            return "#005b94";  // For high rolls, blue
+            return "#005b94"; 
         } else if (number <= 1) {
-            return "#D06E1B";  // Crit fails, orange
+            return "#D06E1B";  
         } else {
-            return "#7db852";  // For normal rolls, green
+            return "#428D0B";
         }
     };
 
     const rollColor = rolling ? '#000000' : getRollColor(rolledNumber);
-    //TODO add screen sizing so that HamburgerMenu only displays on mobile and other menu displays on desktop
 
     return (
         <div className="roller-page">
@@ -172,7 +184,14 @@ export default function RollerPage({ user,
             <div className="backdrop">
                 <div ref={topRef}></div>
                 <img src={RollyPolyLogoV2} style={{ maxHeight: '9vmin', paddingTop: '1.5vmin' }} alt="A picture of a green logo reading RollyPolly" />
-                <div>Dice Clicking Images Here</div>
+                <div className="diceImgs">
+                    <img src={d4} onClick={() => handleDiceSelection(4)} />
+                    <img src={d6} onClick={() => handleDiceSelection(6)} />
+                    <img src={d8} onClick={() => handleDiceSelection(8)} />
+                    <img src={d10} onClick={() => handleDiceSelection(10)} />
+                    <img src={d12} onClick={() => handleDiceSelection(12)} />
+                    <img src={d20} onClick={() => handleDiceSelection(20)} />
+                </div>
                 <DieImg
                     rollDice={rollDice}
                     rolledNumber={rolledNumber}
