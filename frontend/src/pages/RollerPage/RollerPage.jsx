@@ -4,7 +4,6 @@ import { NavLink } from 'react-router';
 import { useState, useEffect, useRef } from "react";
 import * as rollService from '../../services/rollService';
 import './RollerPage.css'
-import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceForm from "../../components/DiceForm/DiceForm";
 import DiceFormula from "../../components/DiceFormula/DiceFormula";
 import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
@@ -20,7 +19,7 @@ import d20 from '../../assets/images/d20.png';
 
 
 export default function RollerPage({ user,
-    setUser, handleLogOut, die, formulas, addFormula, formulaData, setFormulaData, userHistory, setUserHistory,
+    handleLogOut, die, formulas, addFormula, formulaData, setFormulaData, userHistory, setUserHistory,
     toggleModal, modalIsOpen, setUserRoll, demoHistory, setDemoHistory,
     groupList, newGroup, handleNewGroupChange, handleAddNewGroup, handleGroupFilterChange, selectedGroup }) {
     const [rolledNumber, setRolledNumber] = useState(null);
@@ -135,7 +134,6 @@ export default function RollerPage({ user,
                     setDemoHistory([...demoHistory, completeRoll]);
                 }
             } else {
-                //user logic here
                 const completeUserRoll = {
                     result: finalResult,
                     numDice: numDice,

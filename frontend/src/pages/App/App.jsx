@@ -148,7 +148,6 @@ export default function App() {
             element={user ? (
               <RollerPage
                 user={user}
-                setUser={setUser}
                 userHistory={userHistory}
                 setUserHistory={setUserHistory}
                 handleLogOut={handleLogOut}
@@ -176,9 +175,7 @@ export default function App() {
                 user={user}
                 setUser={setUser}
                 handleLogOut={handleLogOut}
-                userHistory={userHistory}
-                demoHistory={demoHistory}
-                setDemoHistory={setDemoHistory}
+
               />
             ) : (
               <Navigate to="/" replace />

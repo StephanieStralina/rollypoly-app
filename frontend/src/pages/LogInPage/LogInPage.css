@@ -6,6 +6,10 @@
     width: 100%;
 }
 
+.login-page .backdrop {
+    overflow-y: hidden;
+}
+
 .login-page form {
     width: 30%;
 }

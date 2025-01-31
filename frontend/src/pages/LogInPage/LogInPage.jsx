@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
-import AppFooter from '../../components/AppFooter/AppFooter';
 import HamburgerNav from '../../components/HamburgerNav/HamburgerNav';
 import './LogInPage.css';;
 
@@ -35,8 +34,8 @@ export default function LogInPage({ setUser, demoHistory, user }) {
   return (
     <div className='login-page'>
       <HamburgerNav
-                          demoHistory={demoHistory}
-                          user={user} />
+        demoHistory={demoHistory}
+        user={user} />
       <div className='backdrop'>
         <h2>Log In!</h2>
         <form autoComplete="off" onSubmit={handleSubmit}>
@@ -59,7 +58,6 @@ export default function LogInPage({ setUser, demoHistory, user }) {
           <button type="submit">LOG IN</button>
         </form>
         <p className="error-message">&nbsp;{errorMsg}</p>
-        <AppFooter className="footer" />
       </div>
     </div>
   );

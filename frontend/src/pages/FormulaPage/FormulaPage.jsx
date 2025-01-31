@@ -1,7 +1,5 @@
 //FormulaPage.jsx
 
-import { useState } from "react";
-import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceFormula from "../../components/DiceFormula/DiceFormula";
 import FormulaModal from "../../components/FormulaModal/FormulaModal";
 import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";

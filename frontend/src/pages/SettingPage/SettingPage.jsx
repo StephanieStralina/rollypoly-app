@@ -4,7 +4,7 @@ import * as authService from '../../services/authService';
 import './SettingPage.css'
 import AppFooter from '../../components/AppFooter/AppFooter';
 
-export default function SettingPage({ user, setUser, handleLogOut, userHistory, demoHistory }) {
+export default function SettingPage({ user, setUser, handleLogOut }) {
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,

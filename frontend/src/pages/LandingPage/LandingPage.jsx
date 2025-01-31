@@ -1,12 +1,10 @@
 import DieImg from "../../components/DieImg/DieImg";
-import { NavLink, Link, useNavigate } from 'react-router';
+import { NavLink, Link } from 'react-router';
 import './LandingPage.css';
-import AppFooter from "../../components/AppFooter/AppFooter";
 import RollyPolyLogo from '../../assets/images/RollyPolyLogo.png'
 
 
-export default function LandingPage({ user, die, handleLogOut }) {
-  const navigate = useNavigate();
+export default function LandingPage({ user, die }) {
 
 
   return (
@@ -18,11 +16,9 @@ export default function LandingPage({ user, die, handleLogOut }) {
         <nav className="landing-nav poppins-light">
           {user ? (
             <>
-              <Link to="" onClick={handleLogOut}>
-                Log Out
+              <Link to="/dashboard">
+                Lost?
               </Link>
-              &nbsp; | &nbsp;
-              <span>Welcome, {user.name}</span>
             </>
           ) : (
             <>

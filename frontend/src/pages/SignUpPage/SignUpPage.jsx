@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
-import AppFooter from '../../components/AppFooter/AppFooter';
 import HamburgerNav from '../../components/HamburgerNav/HamburgerNav';
 import './SignUpPage.css'
 
@@ -81,7 +80,6 @@ export default function SignUpPage({ setUser, demoHistory, user }) {
           </button>
         </form>
         <p className="error-message">&nbsp;{errorMsg}</p>
-        <AppFooter className="footer" />
       </div>
     </div>
   );
