@@ -43,3 +43,59 @@
     }
   }
 
+  .landing-page .backdrop {
+    transform: translateX(100%);
+    animation: slideIn .15s ease-out forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }  
+
+  .landing-logo {
+    transform: scale(0);
+    animation: zoomIn .25s ease-out 0.25s forwards;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .die-img {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.4s ease-out 1s forwards;
+  }
+  
+  .landing-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.4s ease-out 1.2s forwards;
+  }
+  
+  .landing-nav {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.4s ease-out 1.4s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
