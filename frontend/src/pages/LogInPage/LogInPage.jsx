@@ -4,9 +4,10 @@ import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
 import AppFooter from '../../components/AppFooter/AppFooter';
-import './LogInPage.css';
+import HamburgerNav from '../../components/HamburgerNav/HamburgerNav';
+import './LogInPage.css';;
 
-export default function LogInPage({ setUser }) {
+export default function LogInPage({ setUser, demoHistory, user }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -33,6 +34,9 @@ export default function LogInPage({ setUser }) {
 
   return (
     <div className='login-page'>
+      <HamburgerNav
+                          demoHistory={demoHistory}
+                          user={user} />
       <div className='backdrop'>
         <h2>Log In!</h2>
         <form autoComplete="off" onSubmit={handleSubmit}>

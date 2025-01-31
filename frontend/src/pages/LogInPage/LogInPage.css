@@ -9,3 +9,15 @@
 .login-page form {
     width: 30%;
 }
+
+.login-page input {
+    width: 100%;
+    padding: 1.2vmin;
+    font-size: 1.1rem;
+    border: none;
+    border-bottom: 2px solid #56423d; 
+    background-color: transparent;
+    margin-bottom: 0.5vmin;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}

@@ -14,10 +14,10 @@ export default function LandingPage({ user, setUser, die, handleLogOut }) {
   return (
     <div className="landing-page">
       <div className="backdrop">
-        <img src={RollyPolyLogo} style={{maxHeight: '35vmin'}} alt="A picture of a green logo reading RollyPolly" />
+        <img src={RollyPolyLogo} style={{maxHeight: '32vmin'}} alt="A picture of a green logo reading RollyPolly" />
         <DieImg die={die} alt="A picture of a large 20 sided die with the number 20 in the middle of it" />
         <h3>A Dice Rolling App</h3>
-        <nav className="landing-nav">
+        <nav className="landing-nav poppins-light">
           {user ? (
             <>
               <Link to="" onClick={handleLogOut}>

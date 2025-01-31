@@ -1,7 +1,7 @@
 //RollerPage.jsx
 import DieImg from "../../components/DieImg/DieImg";
 import { NavLink } from 'react-router';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import * as rollService from '../../services/rollService';
 import * as groupService from '../../services/groupService';
 import './RollerPage.css'
@@ -15,13 +15,16 @@ import RollyPolyLogoV2 from '../../assets/images/RollyPolyLogoV2.png';
 
 
 export default function RollerPage({ user,
-    setUser, handleLogOut, die, formulas, addFormula, formulaData, setFormulaData,
-    toggleModal, modalIsOpen, setUserRoll,
+    setUser, handleLogOut, die, formulas, addFormula, formulaData, setFormulaData, userHistory, setUserHistory,
+    toggleModal, modalIsOpen, setUserRoll, demoHistory, setDemoHistory,
     groupList, newGroup, handleNewGroupChange, handleAddNewGroup, handleGroupFilterChange, selectedGroup }) {
     const [rolledNumber, setRolledNumber] = useState(null);
-    const [resultMessage, setResultMessage] = useState("Click the dice to roll!");
-    const [demoHistory, setDemoHistory] = useState([]);
-    const [userHistory, setUserHistory] = useState([]);
+    const [rolling, setRolling] = useState(false);
+    const [resultMessage, setResultMessage] = useState(
+        <>
+            <div>Click the dice to roll!</div>
+            <div>&nbsp;</div>
+        </>);
     const [rollCount, setRollCount] = useState(0);
     const [rollForm, setRollForm] = useState({
         numDice: 1,
@@ -30,6 +33,7 @@ export default function RollerPage({ user,
         source: 'manual',
         formula: null,
     });
+    const topRef = useRef(null);
     //TODO: Add onClick change die and dieImg for rolls
 
     useEffect(() => {
@@ -42,6 +46,9 @@ export default function RollerPage({ user,
         fetchUserHistory();
     }, [user, rollCount]);
 
+    function scrollToTop() {
+        topRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
 
     function setDemoRoll(numDice, diceSides, modifier, source) {
         setResultMessage("Now try clicking the dice to roll them!");
@@ -75,6 +82,7 @@ export default function RollerPage({ user,
     }
 
     async function rollDice() {
+        setRolling(true);
         const interval = setInterval(() => {
             setRolledNumber(Math.floor(Math.random() * rollForm.diceSides) + 1);
         }, 35);
@@ -82,18 +90,23 @@ export default function RollerPage({ user,
         setTimeout(async () => {
             clearInterval(interval);
             const results = [];
-            for (let i = 0; i < rollForm.numDice; i++) {
-                results.push(Math.floor(Math.random() * rollForm.diceSides) + 1);
+            const numDice = rollForm.numDice || 1; 
+            const diceSides = rollForm.diceSides || 20;
+            const modifier = parseInt(rollForm.modifier, 10) || 0;
+            for (let i = 0; i < numDice; i++) {
+                results.push(Math.floor(Math.random() * diceSides) + 1);
             }
-            const modifier = parseInt(rollForm.modifier, 10);
             const totalRoll = results.reduce((sum, roll) => sum + roll, 0);
             const finalResult = totalRoll + modifier;
+            const finalColor = getRollColor(finalResult);
+
             setRolledNumber(finalResult);
+            setRolling(false);
             setResultMessage(
-                `You rolled a ${finalResult}! (${results.join(
-                    " + "
-                )} on your ${rollForm.numDice}d${rollForm.diceSides}
-             + ${modifier} modifier)`
+                <>
+                    <div>You rolled a <span style={{ color: finalColor, fontWeight: "bold", textDecoration: "underline" }}>{finalResult}!</span></div>
+                    <div>({results.join(" + ")} on your {numDice}d{diceSides} + {modifier} modifier)</div>
+                </>
             );
             if (!user) {
                 const completeRoll = {
@@ -112,9 +125,9 @@ export default function RollerPage({ user,
                 //user logic here
                 const completeUserRoll = {
                     result: finalResult,
-                    numDice: rollForm.numDice,
-                    diceSides: rollForm.diceSides,
-                    modifier: rollForm.modifier,
+                    numDice: numDice,
+                    diceSides: diceSides,
+                    modifier: modifier,
                     source: rollForm.source,
                     formula: rollForm.formula,
                     userId: user._id,
@@ -131,7 +144,22 @@ export default function RollerPage({ user,
         }, 500);
         setRollCount(rollCount + 1);
     }
+    
+    
+    const getRollColor = (number) => {
+        if (number === null || number === undefined) {
+            return 'black';  // Default color before rolling
+        }
+        if (number >= 20) {
+            return "#005b94";  // For high rolls, blue
+        } else if (number <= 1) {
+            return "#D06E1B";  // Crit fails, orange
+        } else {
+            return "#7db852";  // For normal rolls, green
+        }
+    };
 
+    const rollColor = rolling ? '#000000' : getRollColor(rolledNumber);
     //TODO add screen sizing so that HamburgerMenu only displays on mobile and other menu displays on desktop
 
     return (
@@ -139,16 +167,36 @@ export default function RollerPage({ user,
                 <HamburgerNav
                     demoHistory={demoHistory}
                     userHistory={userHistory}
-                    user={user} />
+                    user={user}
+                    handleLogOut={handleLogOut} />
             <div className="backdrop">
+                <div ref={topRef}></div>
                 <img src={RollyPolyLogoV2} style={{ maxHeight: '9vmin', paddingTop: '1.5vmin' }} alt="A picture of a green logo reading RollyPolly" />
                 <div>Dice Clicking Images Here</div>
                 <DieImg
                     rollDice={rollDice}
                     rolledNumber={rolledNumber}
-                    die={die} />
-                <div>{resultMessage}</div>
+                    die={die}
+                    rollColor={rollColor} />
+                <div className="result-message">
+                    {resultMessage}
+                </div>
                 <DiceForm rollForm={rollForm} handleChange={handleChange} />
+                {user ?
+                    (
+                        <div className="add-formula-btn" onClick={toggleModal}>
+                            <img src={addImg}
+                                style={{ width: '8vmin', height: '8vmin' }}></img>
+                            <span className="add-subtext">Click to add formula</span>
+                        </div>
+                    ) : (
+                        <>
+                            <img src={addImg}
+                                style={{ width: '8vmin', height: '8vmin'}}></img>
+                            <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
+                        </>
+                    )
+                }
                 {user ?
                     (
                         <>
@@ -156,7 +204,10 @@ export default function RollerPage({ user,
                                 user={user}
                                 formulas={formulas}
                                 setUserRoll={setUserRoll}
-                                onClickHandler={setUserRoll}
+                                onClickHandler={(formula) => {
+                                    setUserRoll(formula);
+                                    scrollToTop();
+                                }}
                                 selectedGroup={selectedGroup}
                                 handleGroupFilterChange={handleGroupFilterChange}
                                 groupList={groupList} />
@@ -168,21 +219,8 @@ export default function RollerPage({ user,
                                 onClickHandler={setDemoRoll} />
                         </>
                     )}
-                {user ?
-                    (
-                        <div className="add-formula-btn" onClick={toggleModal}>
-                            <img src={addImg}
-                                style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
-                            <span>Click to add formula</span>
-                        </div>
-                    ) : (
-                        <>
-                            <img src={addImg}
-                                style={{ maxWidth: '10vmin', maxHeight: '10vmin', margin: '4vmin' }}></img>
-                            <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
-                        </>
-                    )
-                }
+            </div>
+            
                 <FormulaModal
                     modalIsOpen={modalIsOpen}
                     toggleModal={toggleModal}
@@ -194,8 +232,7 @@ export default function RollerPage({ user,
                     handleAddNewGroup={handleAddNewGroup}
                     formulaData={formulaData}
                     setFormulaData={setFormulaData} />
-
-            </div>
+                
         </div>
     );
 }

@@ -6,11 +6,13 @@
 }
 
 .die-text {
-    position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: fit-content;
   height: fit-content;
-  font-size: 7vmin;
+  font-size: 5.5vmin;
+  color: inherit;
+  transition: color 0.3s ease;
 }

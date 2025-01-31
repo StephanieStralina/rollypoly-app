@@ -1,10 +1,10 @@
 //SettingsPage.jsx
 import { useState } from 'react';
 import * as authService from '../../services/authService';
-import AppFooter from "../../components/AppFooter/AppFooter";
 import './SettingPage.css'
+import AppFooter from '../../components/AppFooter/AppFooter';
 
-export default function SettingPage({ user, setUser, handleLogOut }) {
+export default function SettingPage({ user, setUser, handleLogOut, userHistory, demoHistory }) {
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
@@ -41,45 +41,51 @@ export default function SettingPage({ user, setUser, handleLogOut }) {
   }
 
   return (
-    <div className='settings-page'>
-      <div className='backdrop'>
-        <h2>Update Your Settings</h2>
-        <p>&nbsp;{message}</p>
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <label>New Password (Optional)</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <label>Confirm New Password</label>
-          <input
-            type="password"
-            name="confirm"
-            value={formData.confirm}
-            onChange={handleChange}
-          />
-          <button type="submit">Update</button>
-        </form>
-        <AppFooter user={user} setUser={setUser} handleLogOut={handleLogOut} className="footer" />
+    <div className="settings-page">
+    <h2>Update Your Settings</h2>
+    <p className="alert-message">{message}</p>
+    <form className="settings-form" autoComplete="off" onSubmit={handleSubmit}>
+      <div className="form-field">
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
       </div>
-    </div>
+      <div className="form-field">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-field">
+        <label>New Password (Optional)</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-field">
+        <label>Confirm New Password</label>
+        <input
+          type="password"
+          name="confirm"
+          value={formData.confirm}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">Update</button>
+    </form>
+    <AppFooter className="settings-footer" handleLogOut={handleLogOut} user={user} setUser={setUser}/>
+  </div>
   )
 }

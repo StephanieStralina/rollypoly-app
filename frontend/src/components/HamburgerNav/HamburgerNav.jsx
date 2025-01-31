@@ -26,8 +26,7 @@ export default function HamburgerNav({ demoHistory, user, userHistory, handleLog
                     <li><NavLink to='/settings'>Settings</NavLink></li>
                     <li><NavLink to='/formulas'>Formulas</NavLink></li>
                     <li><Link to="" onClick={handleLogOut}>Log Out</Link></li>
-                    <li></li>
-                    <div>
+                    <div className="history-list">
                         <h3>{user.name} History</h3>
                         {[...userHistory].reverse().map((roll, index) => (
                             <li key={index}>
@@ -39,9 +38,10 @@ export default function HamburgerNav({ demoHistory, user, userHistory, handleLog
                     ):(
                         <>
                         <li><NavLink to="/">Home</NavLink></li>
+                        <li><NavLink to="/demo">Demo</NavLink></li>
                         <li><NavLink to="/login">Log In</NavLink></li>
                         <li><NavLink to="/sign-up">Sign Up</NavLink></li>
-                    <div>
+                    <div className="history-list">
                         <h3>Guest History</h3>
                         {[...demoHistory].reverse().map((roll, index) => (
                             <li key={index}>

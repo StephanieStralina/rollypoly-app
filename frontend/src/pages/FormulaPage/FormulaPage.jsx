@@ -4,10 +4,11 @@ import { useState } from "react";
 import AppFooter from "../../components/AppFooter/AppFooter";
 import DiceFormula from "../../components/DiceFormula/DiceFormula";
 import FormulaModal from "../../components/FormulaModal/FormulaModal";
+import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
 import './FormulaPage.css';
 import addImg from '../../assets/images/addImg.png';
 
-export default function FormulaPage({ formulas, user, setUser, handleLogOut,
+export default function FormulaPage({ formulas, user, setUser, handleLogOut, userHistory,
     toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula,
     setSelectedFormula, handleUpdateFormula, handleDeleteFormula, formulaData, setFormulaData,
     groupList, newGroup, handleNewGroupChange, handleAddNewGroup,
@@ -20,11 +21,15 @@ export default function FormulaPage({ formulas, user, setUser, handleLogOut,
 
     return (
         <div className="formula-page">
-            <div className="backdrop">
+                <HamburgerNav
+                    userHistory={userHistory}
+                    user={user}
+                    handleLogOut={handleLogOut} />
+            <div className="backdrop flex-end">
                 <h2>Formula Page</h2>
                 <div className="add-formula-btn" onClick={toggleModal}>
                     <img src={addImg} style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
-                    <span>Click to add formula</span>
+                    <span style={{ fontSize: '1em', fontWeight: '300' }}>Click to add formula</span>
                 </div>
                 <DiceFormula
                     user={user}
@@ -34,6 +39,7 @@ export default function FormulaPage({ formulas, user, setUser, handleLogOut,
                     handleGroupFilterChange={handleGroupFilterChange}
                     groupList={groupList}
                 />
+            </div>
                 <FormulaModal user={user}
                     addFormula={addFormula}
                     modalIsOpen={modalIsOpen}
@@ -49,12 +55,6 @@ export default function FormulaPage({ formulas, user, setUser, handleLogOut,
                     handleAddNewGroup={handleAddNewGroup}
                     formulaData={formulaData}
                     setFormulaData={setFormulaData} />
-                <AppFooter
-                    user={user}
-                    setUser={setUser}
-                    handleLogOut={handleLogOut}
-                    className="footer" />
-            </div>
         </div>
     )
 }

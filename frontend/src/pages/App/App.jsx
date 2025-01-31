@@ -17,6 +17,8 @@ import FormulaPage from '../FormulaPage/FormulaPage';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [userHistory, setUserHistory] = useState([]);
+  const [demoHistory, setDemoHistory] = useState([]);
   const [die, setDie] = useState(20);
   const [formulas, setFormulas] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -45,10 +47,9 @@ export default function App() {
     const fetchGroups = async () => {
       try {
         const groups = await groupService.indexGroups();
-        console.log("Fetched groups:", groups);
         setGroupList(groups);
-      } catch (error) {
-        console.error("Error fetching groups:", error);
+      } catch (e) {
+        console.error("Error fetching groups:", e);
       }
     };
     if (user) {
@@ -98,7 +99,7 @@ export default function App() {
       handleModalClose();
       navigate('/formulas');
     } catch (e) {
-      console.error('Error:', e);
+      console.log('Error:', e);
     }
   };
 
@@ -133,17 +134,23 @@ export default function App() {
           <Route path="/" element={
             user ? (<Navigate to="/dashboard" replace />)
               : (<LandingPage user={user} setUser={setUser} die={die} />)} />
-          <Route path="/demo" element={
-            <RollerPage die={die} setFormulaData={setFormulaData} />} />
+          <Route path="/demo" 
+          element={<RollerPage 
+              die={die} 
+              setFormulaData={setFormulaData} 
+              demoHistory={demoHistory}
+              setDemoHistory={setDemoHistory}/>} />
           <Route path="/sign-up" element={
-            <SignUpPage setUser={setUser} />} />
-          <Route path="/login" element={<LogInPage setUser={setUser} />} />
+            <SignUpPage setUser={setUser} demoHistory={demoHistory} />} />
+          <Route path="/login" element={<LogInPage setUser={setUser} user={user} demoHistory={demoHistory} />} />
 
           <Route path="/dashboard"
             element={user ? (
               <RollerPage
                 user={user}
                 setUser={setUser}
+                userHistory={userHistory}
+                setUserHistory={setUserHistory}
                 handleLogOut={handleLogOut}
                 die={die}
                 formulas={filteredFormulas}
@@ -169,6 +176,9 @@ export default function App() {
                 user={user}
                 setUser={setUser}
                 handleLogOut={handleLogOut}
+                userHistory={userHistory}
+                demoHistory={demoHistory}
+                setDemoHistory={setDemoHistory}
               />
             ) : (
               <Navigate to="/" replace />
@@ -198,6 +208,7 @@ export default function App() {
                 handleGroupFilterChange={handleGroupFilterChange}
                 formulaData={formulaData}
                 setFormulaData={setFormulaData}
+                userHistory={userHistory}
               />
             ) : (
               <Navigate to="/" replace />

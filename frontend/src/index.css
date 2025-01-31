@@ -1,8 +1,8 @@
 
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 100;
 
   color: #1a1a1a;
   background-color: whitesmoke;
@@ -12,6 +12,116 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.poppins-thin {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+
 
 * {
   box-sizing: border-box;
@@ -26,35 +136,37 @@ body {
 h1,
 h2 {
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 button {
-  border: 0.5vmin solid #1a1a1a;
+  border: 0.25vmin solid #3a001e;
   border-radius: 0.5vmin;
   padding: 0.8vmin;
   font-size: 2vmin;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color: whitesmoke;
+  background-color: #3a001e;
+  color: #fff4ee;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: white;
+  background-color: #fff4ee;
   color: #1a1a1a;
   border-color: #1a1a1a;
 }
 
 button:disabled {
-  background-color: grey;
+  background-color: rgb(195, 195, 195);
 }
 
 form {
   display: grid;
   gap: 1.2vmin;
   padding: 4vmin;
-  border: 0.5vmin solid #1a1a1a;
+  /* border: 0.5vmin solid #1a1a1a; */
   border-radius: 1vmin;
 }
 
@@ -81,5 +193,6 @@ h2 {
 }
 
 .error-message {
-  color: rgb(166, 29, 29);
+  color: rgb(195, 88, 26);
 }
+

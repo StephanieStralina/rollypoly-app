@@ -6,11 +6,9 @@ export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas, 
 
     return (
         <div className='dice-formulas'>
-            
             {user ? (
                 <>
-                <div>
-                      <label>Filter by Group:</label>
+                <div className='group-select'>
                       <select value={selectedGroup} onChange={handleGroupFilterChange}>
                         <option value="All Formulas">All Formulas</option>
                         {groupList.map((group) => (
@@ -19,11 +17,12 @@ export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas, 
                           </option>
                         ))}
                       </select>
-                    </div>
+                </div>
                     {formulas.map((formula) => (
                         <button key={formula._id} className='dice-formula-btn'
                         onClick={() => onClickHandler(formula)} >{formula.name}</button>
                     ))}
+                    <div>&nbsp;</div>
                 </>
             ) : (
                 <>
