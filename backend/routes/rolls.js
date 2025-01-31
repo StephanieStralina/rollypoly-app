@@ -8,10 +8,8 @@ const rollCtrl = require('../controllers/rolls');
 
 //INDEX /dashboard find roller functionality, rollCtrl.index
 router.get('/', rollCtrl.index)
-
 //INDEX /dashboard find roller functionality, rollCtrl.index
 router.get('/:userId', rollCtrl.findRoller)
-
 //CREATE /dashboard create roller functionality, rollCtrl.initializeRoller
 router.post('/', rollCtrl.initializeRoller)
 

@@ -7,7 +7,6 @@ const groupCtrl = require('../controllers/groups');
 
 //INDEX /groups find roller functionality, groupCtrl.index
 router.get('/', groupCtrl.indexGroups)
-
 //CREATE /dashboard find roller functionality, rollCtrl.index
 router.post('/', groupCtrl.createGroup)
 

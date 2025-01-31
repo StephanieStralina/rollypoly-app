@@ -3,7 +3,7 @@
 
 # RollyPo.Ly Dice Roller App
 
-RollPol.ly is a system agnostic dice app for TTRPGs such as *Dungeons & Dragons* and other board games. It allows you to create and categorize your own custom dice formulas so that you don't have to rely on paid services.
+RollPol.ly is a system agnostic dice app for TTRPGs such as *Dungeons & Dragons* and other board games. It allows you to create and categorize your own custom dice formulas so that you don't have to rely on paid services like D&D Beyond, or on smaller companies that may not have digital character building tools.
 
 ## Screenshots
 
