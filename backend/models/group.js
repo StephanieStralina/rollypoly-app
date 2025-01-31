@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const groupSchema = new Schema ({
   name: {
   type: String,
-  default: null,
+  default: '',
   },
   createdBy: {
     type: Schema.Types.ObjectId,
