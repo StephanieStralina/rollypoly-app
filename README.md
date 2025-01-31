@@ -1,5 +1,5 @@
 
-<p align="center"><img src="./frontend/public/dieImg.png" alt="Encounterly logo" height="200" style=""></p>
+<p align="center"><img src="./frontend/public/dieImgReadme.png" alt="Encounterly logo" height="200" style=""></p>
 
 # RollyPo.Ly Dice Roller App
 
