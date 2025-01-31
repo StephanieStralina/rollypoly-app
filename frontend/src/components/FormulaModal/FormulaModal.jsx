@@ -13,7 +13,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, for
                 numDice: 1,
                 diceSides: 20,
                 modifier: 0,
-                group: null,
+                group: '',
             });
             return;
         } else {
@@ -23,7 +23,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, for
                     const formulaDetails = await formulaService.show(formulaId, { signal: controller.signal });
                     setFormulaData({
                         ...formulaDetails,
-                        group: formulaDetails.group ? formulaDetails.group._id : null,
+                        group: formulaDetails.group ? formulaDetails.group._id : '',
                     });
                 } catch (error) {
                     if (error.name !== 'AbortError') {
@@ -42,7 +42,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, for
         if (name === 'group') {
             setFormulaData({
                 ...formulaData,
-                [name]: value === 'None' ? null : value,
+                [name]: value === 'None' ? '' : value,
             });
         } else {
             setFormulaData({
@@ -59,7 +59,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, for
             numDice: Number(formulaData.numDice),
             diceSides: Number(formulaData.diceSides),
             modifier: Number(formulaData.modifier),
-            group: formulaData.group || null,
+            group: formulaData.group || '',
         };
         if (formulaId) {
             try {

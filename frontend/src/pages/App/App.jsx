@@ -32,7 +32,7 @@ export default function App() {
     numDice: 1,
     diceSides: 20,
     modifier: 0,
-    group: null,
+    group: '',
   })
   const navigate = useNavigate();
 
