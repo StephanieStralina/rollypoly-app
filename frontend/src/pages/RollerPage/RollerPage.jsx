@@ -202,7 +202,7 @@ export default function RollerPage({ user,
                 {user ?
                     (
                         <div className="add-formula-btn" onClick={toggleModal}>
-                            <img src={addImg}
+                            <img className="plus-img" src={addImg}
                                 style={{ width: '8vmin', height: '8vmin' }}></img>
                             <span className="add-subtext">Click to add formula</span>
                         </div>

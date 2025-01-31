@@ -99,3 +99,16 @@
       transform: translateY(0);
     }
   }
+  
+  .landing-logo.shrink {
+    animation: shrinkOut 0.3s ease-in forwards;
+  }
+
+  @keyframes shrinkOut {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.3);
+    }
+  }
