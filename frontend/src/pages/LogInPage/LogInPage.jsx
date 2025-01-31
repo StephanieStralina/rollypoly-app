@@ -4,7 +4,8 @@ import { useState } from 'react';
 import * as authService from '../../services/authService';
 import { useNavigate } from 'react-router';
 import HamburgerNav from '../../components/HamburgerNav/HamburgerNav';
-import './LogInPage.css';;
+import './LogInPage.css';
+import RollyPolyLogoV2 from '../../assets/images/RollyPolyLogoV2.png';
 
 export default function LogInPage({ setUser, demoHistory, user }) {
   const [formData, setFormData] = useState({
@@ -37,6 +38,7 @@ export default function LogInPage({ setUser, demoHistory, user }) {
         demoHistory={demoHistory}
         user={user} />
       <div className='backdrop'>
+        <img src={RollyPolyLogoV2} style={{ maxHeight: '9vmin', paddingTop: '1.5vmin' }} alt="A picture of a green logo reading RollyPolly" />
         <h2>Log In!</h2>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Email</label>

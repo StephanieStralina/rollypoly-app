@@ -17,8 +17,8 @@ async function logIn(req, res) {
     if (!match) throw new Error();
     const token = createJWT(user);
     res.json(token);
-  } catch (err) {
-    console.log(err);
+  } catch (e) {
+    console.log(e);
     res.status(400).json({ message: 'Bad Credentials' });
   }
 }
@@ -28,8 +28,8 @@ async function signUp(req, res) {
     const user = await User.create(req.body);
     const token = createJWT(user);
     res.json(token);
-  } catch (err) {
-    console.log(err);
+  } catch (e) {
+    console.log(e);
     res.status(400).json({ message: 'Duplicate Email' });
   }
 }
@@ -52,18 +52,16 @@ async function updateUser(req, res) {
     
     const token = createJWT(user);
     res.json(token);
-  } catch (err) {
-    console.log(err);
+  } catch (e) {
+    console.log(e);
     res.status(400).json({ message: 'Update Failed' });
   }
 }
 
 
-/*--- Help Functions ---*/
 
 function createJWT(user) {
   return jwt.sign(
-    // data payload
     { user },
     process.env.SECRET,
     { expiresIn: '24h' }

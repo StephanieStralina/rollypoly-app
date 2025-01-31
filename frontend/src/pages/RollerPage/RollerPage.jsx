@@ -183,12 +183,12 @@ export default function RollerPage({ user,
                 <div ref={topRef}></div>
                 <img src={RollyPolyLogoV2} style={{ maxHeight: '9vmin', paddingTop: '1.5vmin' }} alt="A picture of a green logo reading RollyPolly" />
                 <div className="diceImgs">
-                    <img src={d4} onClick={() => handleDiceSelection(4)} />
-                    <img src={d6} onClick={() => handleDiceSelection(6)} />
-                    <img src={d8} onClick={() => handleDiceSelection(8)} />
-                    <img src={d10} onClick={() => handleDiceSelection(10)} />
-                    <img src={d12} onClick={() => handleDiceSelection(12)} />
-                    <img src={d20} onClick={() => handleDiceSelection(20)} />
+                    <img src={d4} alt="Small image of a 4-sided dice" onClick={() => handleDiceSelection(4)} />
+                    <img src={d6} alt="Small image of a 6-sided dice" onClick={() => handleDiceSelection(6)} />
+                    <img src={d8} alt="Small image of a 8-sided dice" onClick={() => handleDiceSelection(8)} />
+                    <img src={d10} alt="Small image of a 10-sided dice" onClick={() => handleDiceSelection(10)} />
+                    <img src={d12} alt="Small image of a 12-sided dice" onClick={() => handleDiceSelection(12)} />
+                    <img src={d20} alt="Small image of a 20-sided dice" onClick={() => handleDiceSelection(20)} />
                 </div>
                 <DieImg
                     rollDice={rollDice}
@@ -202,13 +202,13 @@ export default function RollerPage({ user,
                 {user ?
                     (
                         <div className="add-formula-btn" onClick={toggleModal}>
-                            <img className="plus-img" src={addImg}
+                            <img className="plus-img"  alt="Small image of a plus sign inside a circle" src={addImg}
                                 style={{ width: '8vmin', height: '8vmin' }}></img>
                             <span className="add-subtext">Click to add formula</span>
                         </div>
                     ) : (
                         <>
-                            <img src={addImg}
+                            <img src={addImg} alt="Small image of a plus sign inside a circle"
                                 style={{ width: '8vmin', height: '8vmin'}}></img>
                             <span><NavLink to="/sign-up">Sign up</NavLink> or <NavLink to="/login">Log In</NavLink> to add your own formulas!</span>
                         </>

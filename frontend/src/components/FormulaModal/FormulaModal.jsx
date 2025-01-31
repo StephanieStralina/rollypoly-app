@@ -27,7 +27,7 @@ export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, for
                     });
                 } catch (error) {
                     if (error.name !== 'AbortError') {
-                        console.error("Error fetching formula:", error);
+                        console.log("Error fetching formula:", error);
                     }
                 }
             }
@@ -65,13 +65,13 @@ export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, for
             try {
                 await handleUpdateFormula(formulaId, formattedFormulaData);
             } catch (e) {
-                console.error('Error submitting formula:', e);
+                console.log('Error submitting formula:', e);
             }
         } else {
             try {
                 await addFormula(formattedFormulaData)
             } catch (e) {
-                console.error('Error submitting formula:', e);
+                console.log('Error submitting formula:', e);
             }
         }
         setFormulaData({
