@@ -90,27 +90,27 @@
     text-align: center;
 }
 
-@media (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
     .history-list li {
-        font-size: 1em; 
-        padding: 1vmin;
+      font-size: 1em;
+      padding: 1vmin;
     }
-
+  
     .dropdown-menu {
-        width: 80%; 
-        padding-top: 10vmin; 
-        height: 250vmin; 
-        top: -5vmin;
-        right: 0;
+      width: 80%;
+      padding-top: 10vmin;
+      height: 250vmin;
+      top: -5vmin;
+      right: 0;
     }
-
+  
     .hamburger-nav h3 {
-        font-size: 1.2rem;
+      font-size: 1.2rem;
     }
-
+  
     .hamburger-nav img {
-        width: 5vmin; 
-        height: 5vmin;
+      width: 5vmin;
+      height: 5vmin;
     }
-
-}
+  
+  }

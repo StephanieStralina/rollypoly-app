@@ -7,6 +7,10 @@
     font-weight: 400;
 }
 
+.backdrop {
+    overflow-x: hidden;
+}
+
 .add-formula-btn {
     display: flex;
     flex-direction: column;
