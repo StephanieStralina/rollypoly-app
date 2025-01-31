@@ -26,7 +26,7 @@ export default function FormulaPage({ formulas, user, handleLogOut, userHistory,
             <div className="backdrop flex-end">
                 <h2>Formula Page</h2>
                 <div className="add-formula-btn" onClick={toggleModal}>
-                    <img src={addImg} style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
+                    <img src={addImg} alt="Small image of a plus sign inside a circle" style={{ maxWidth: '10vmin', maxHeight: '10vmin' }}></img>
                     <span style={{ fontSize: '1em', fontWeight: '300' }}>Click to add formula</span>
                 </div>
                 <DiceFormula
