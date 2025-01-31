@@ -86,7 +86,7 @@
 }
 
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .modal-content {
         max-width: 95%; 
         width: 100%;
@@ -159,7 +159,7 @@
     }
 }
 
-@media (max-width: 380px) {
+@media only screen and (max-width: 380px) {
     .close-btn {
         top: -70vmin; 
         right: -42vmin;

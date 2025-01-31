@@ -41,7 +41,7 @@
 }
 
 
-@media (max-width: 600px) {
+@media only screen (max-width: 600px) {
   .roll-form {
     flex-direction: column;
     gap: 5px;
