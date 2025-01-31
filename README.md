@@ -1,7 +1,7 @@
 
 <p align="center"><img src="./frontend/public/dieImgReadme.png" alt="Encounterly logo" height="200" style=""></p>
 
-# RollyPo.Ly Dice Roller App
+# RollyPo.ly Dice Roller App
 
 RollPol.ly is a system agnostic dice app for TTRPGs such as *Dungeons & Dragons* and other board games. It allows you to create and categorize your own custom dice formulas so that you don't have to rely on paid services like D&D Beyond, or on smaller companies that may not have digital character building tools.
 
@@ -16,7 +16,7 @@ RollPol.ly is a system agnostic dice app for TTRPGs such as *Dungeons & Dragons*
 
 ## How to Use
 
-1. Go to the [RollyPo.Ly website.](https://rollypolyapp-05daf9d33fc3.herokuapp.com/)
+1. Go to the [RollyPo.ly website.](https://rollypolyapp-05daf9d33fc3.herokuapp.com/)
 2. Sign up for a free account or try the Demo
 3. Edit the number of dice, type of dice, and modifier you'd like to add
 4. Click the image of the large dice to roll your fate!
@@ -44,7 +44,7 @@ RollPol.ly is a system agnostic dice app for TTRPGs such as *Dungeons & Dragons*
 Dice icons from Lucas Rathgeb of Noun Project.
 
 ## Next Steps
-- Add option to remove groups or edit groups
+- Add option to remove groups or edit groups, mass editing of formulas
 - Add option to color code formula for quick visual reference
 - Add ability to change modifier and existing score after roll
 - Add advantage/disadvantage and other roll altering options
