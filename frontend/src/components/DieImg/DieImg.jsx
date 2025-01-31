@@ -1,5 +1,4 @@
 //DieImg.jsx
-import { useState, useEffect } from 'react';
 import dieImg from '../../assets/images/dieImg.png';
 import './DieImg.css'
 

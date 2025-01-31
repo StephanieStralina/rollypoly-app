@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router';
 import './AppFooter.css'
 
-export default function AppFooter({user, setUser, handleLogOut}) {
+export default function AppFooter({user, handleLogOut}) {
     
     return (
 

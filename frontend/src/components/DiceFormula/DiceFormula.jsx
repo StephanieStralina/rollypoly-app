@@ -1,8 +1,7 @@
 //DiceFormula.jsx
-
 import './DiceFormula.css';
 
-export default function DiceFormula({ setDemoRoll, setUserRoll, user, formulas, onClickHandler, selectedGroup, handleGroupFilterChange, groupList, formula }) {
+export default function DiceFormula({ setDemoRoll, user, formulas, onClickHandler, selectedGroup, handleGroupFilterChange, groupList, formula }) {
 
     return (
         <div className='dice-formulas'>

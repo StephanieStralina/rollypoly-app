@@ -133,7 +133,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={
             user ? (<Navigate to="/dashboard" replace />)
-              : (<LandingPage user={user} setUser={setUser} die={die} />)} />
+              : (<LandingPage user={user} die={die} />)} />
           <Route path="/demo" 
           element={<RollerPage 
               die={die} 

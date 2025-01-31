@@ -1,6 +1,4 @@
 //DiceForm.jsx
-
-import { useState } from 'react';
 import './DiceForm.css';
 
 export default function DiceForm({rollForm, handleChange}) {

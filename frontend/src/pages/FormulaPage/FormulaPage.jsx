@@ -8,7 +8,7 @@ import HamburgerNav from "../../components/HamburgerNav/HamburgerNav";
 import './FormulaPage.css';
 import addImg from '../../assets/images/addImg.png';
 
-export default function FormulaPage({ formulas, user, setUser, handleLogOut, userHistory,
+export default function FormulaPage({ formulas, user, handleLogOut, userHistory,
     toggleModal, modalIsOpen, addFormula, handleModalClose, selectedFormula,
     setSelectedFormula, handleUpdateFormula, handleDeleteFormula, formulaData, setFormulaData,
     groupList, newGroup, handleNewGroupChange, handleAddNewGroup,

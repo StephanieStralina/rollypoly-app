@@ -1,10 +1,9 @@
 //FormulaModal.jsx
-
 import { useEffect } from 'react';
 import * as formulaService from '../../services/formulaService';
 import './FormulaModal.css'
 
-export default function FormulaModal({ modalIsOpen, toggleModal, user, addFormula, formulaId, formulaData, setFormulaData, handleModalClose, setSelectedFormula, handleUpdateFormula, handleDeleteFormula, groupList, newGroup, handleNewGroupChange, handleAddNewGroup }) {
+export default function FormulaModal({ modalIsOpen, toggleModal, addFormula, formulaId, formulaData, setFormulaData, handleModalClose, handleUpdateFormula, handleDeleteFormula, groupList, newGroup, handleNewGroupChange, handleAddNewGroup }) {
 
 
     useEffect(() => {
